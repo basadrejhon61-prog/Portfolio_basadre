@@ -12,7 +12,12 @@ add_action('after_setup_theme', 'panto_setup');
 
 /* Styles + script. No web fonts: the theme uses the visitor's default system font. */
 function panto_assets() {
-    wp_enqueue_style('panto-style', get_stylesheet_uri(), [], wp_get_theme()->get('Version'));
+   wp_enqueue_style(
+  'panto-style',
+  get_stylesheet_uri(),
+  [],
+  filemtime(get_stylesheet_directory() . '/style.css')
+);
     wp_enqueue_script('panto-main', get_template_directory_uri() . '/assets/js/main.js', [], wp_get_theme()->get('Version'), [
         'in_footer' => true,
         'strategy'  => 'defer',

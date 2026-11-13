@@ -23,7 +23,7 @@ $icon  = function ($path) {
 
 /* Social icons shown under the skills (Facebook, Twitter, Instagram, TikTok).
    Links come from team-data.php: 'facebook', 'twitter', 'instagram', 'tiktok'
-   (or inside a 'social' => [...] array). Missing link = the icon points to "#". */
+   (or inside a 'social' => [...] array). Missing link = the icon is not shown. */
 $socials = [
   'facebook'  => ['Facebook',  '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg>'],
   'twitter'   => ['Twitter',   '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.29 3.9A12.15 12.15 0 0 1 3.07 4.8a4.28 4.28 0 0 0 1.33 5.71 4.27 4.27 0 0 1-1.94-.54v.05a4.28 4.28 0 0 0 3.43 4.2 4.3 4.3 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.97A8.6 8.6 0 0 1 2 19.54a12.1 12.1 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2l-.01-.56A8.7 8.7 0 0 0 22.46 6z"/></svg>'],
@@ -146,18 +146,18 @@ $quote_icon = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><
                 </ul>
               <?php endif; ?>
 
-              <!-- social links -->
+              <!-- social links (only the ones with a link are shown) -->
               <ul class="tm-social" aria-label="<?php echo esc_attr($m['name']); ?> on social media">
                 <?php foreach ($socials as $key => $soc) :
                   $url = '';
-                  if (!empty($m[$key]) && is_string($m[$key])) { $url = $m[$key]; }
-                  elseif (!empty($m['social'][$key]) && is_string($m['social'][$key])) { $url = $m['social'][$key]; }
-                  $has = $url !== '';
+                  if (!empty($m[$key]) && is_string($m[$key])) { $url = trim($m[$key]); }
+                  elseif (!empty($m['social'][$key]) && is_string($m['social'][$key])) { $url = trim($m['social'][$key]); }
+                  if ($url === '') { continue; }   // no link = icon is not shown
+                  if (!preg_match('#^https?://#i', $url)) { $url = 'https://' . ltrim($url, '/'); }
                 ?>
                   <li>
-                    <a href="<?php echo $has ? esc_url($url) : '#'; ?>"
-                       aria-label="<?php echo esc_attr($soc[0]); ?>" title="<?php echo esc_attr($soc[0]); ?>"
-                       <?php echo $has ? 'target="_blank" rel="noopener noreferrer"' : 'aria-disabled="true"'; ?>>
+                    <a href="<?php echo esc_url($url); ?>" target="_blank" rel="noopener noreferrer"
+                       aria-label="<?php echo esc_attr($m['name'] . ' on ' . $soc[0]); ?>" title="<?php echo esc_attr($m['name'] . ' - ' . $soc[0]); ?>">
                       <?php echo $soc[1]; ?>
                     </a>
                   </li>
@@ -238,6 +238,18 @@ $quote_icon = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><
     });
   })();
   </script>
+
+  <script>
+  // social icons: open the member's own page directly
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('.tm-social a') : null;
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href || href === '#') return;
+    e.preventDefault(); e.stopPropagation();
+    window.open(href, '_blank', 'noopener');
+  }, true);
+  </script>
 </section>
 
 <!-- MEMORIES -->
@@ -246,36 +258,59 @@ $quote_icon = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><
   <span class="memo-deco d2" aria-hidden="true"></span>
   <span class="ghost" data-dir="-1" aria-hidden="true">MOMENTS</span>
   <div class="wrap">
-    <p class="tag rv">02 &middot; Memories</p>
-    <h2 class="section-title rv-title">School memories &amp; activities</h2>
-    <p class="memo-sub rv">A few snapshots from our journey as BSIT students. Click a photo to see it bigger.</p>
-    <?php
-    $memories = [
-      ['Team Collaboration',    'How we work together to solve problems.',      'team1.jpg'],
-      ['Coding Sessions',       'Late night coding and debugging moments.',     'team2.jpg'],
-      ['Project Presentations', 'Defending our systems in front of the panel.', 'presentation.jpg'],
-      ['Friends & Classmates',  'The bond we built throughout college.',        'sch_evnts2.jpg'],
-      ['School Events',         'Foundation day, IT Week, and celebrations.',   'sch_evnts.jpg'],
-      ['Our Gallery',           'A collection of our favorite memories.',       'team6.jpg'],
-    ];
-    $tilts = ['-2.2deg', '1.6deg', '-1.2deg', '2deg', '-1.6deg', '1.2deg'];
-    $tapes = ['--sun', '--sky', '--rose', '--emerald', '--violet', '--cobalt'];
-    ?>
-    <div class="memo-grid">
-      <?php foreach ($memories as $i => $mem) : $src = esc_url(panto_img($mem[2])); ?>
-        <a class="memo-card rv" data-parallax href="<?php echo $src; ?>" target="_blank" rel="noopener"
-           style="--tilt: <?php echo $tilts[$i % 6]; ?>; --tape: var(<?php echo $tapes[$i % 6]; ?>)">
-          <span class="memo-photo"><img class="memo-img" src="<?php echo $src; ?>" alt="<?php echo esc_attr($mem[0]); ?>" loading="lazy" decoding="async"></span>
-          <div class="memo-txt">
-            <span class="memo-n"><?php echo sprintf('%02d', $i + 1); ?></span>
-            <h3><?php echo esc_html($mem[0]); ?></h3>
-            <p><?php echo esc_html($mem[1]); ?></p>
-            <span class="memo-more">View photo <?php echo $arrow; ?></span>
-          </div>
-        </a>
-      <?php endforeach; ?>
-    </div>
+  <p class="tag" data-mm>02 &middot; Memories</p>
+  <h2 class="section-title" data-mm>School memories &amp; activities</h2>
+  <p class="memo-sub" data-mm>A few snapshots from our journey as BSIT students. Click a photo to see it bigger.</p>
+  <?php
+$memories = [
+  ['Team Collaboration',    'How we work together to solve problems.',      'team.png'],
+  ['Coding Sessions',       'Late night coding and debugging moments.',     'team2.jpg'],
+  ['Project Presentations', 'Defending our systems in front of the panel.', 'presentation.jpg'],
+  ['Friends & Classmates',  'The bond we built throughout college.',        'sch_evnts2.jpg'],
+  ['School Events',         'Foundation day, IT Week, and celebrations.',   'sch_evnts.jpg'],
+  ['Our Gallery',           'A collection of our favorite memories.',       'team6.jpg'],
+];
+$tapes = ['--sun', '--sky', '--rose', '--emerald', '--violet', '--cobalt'];
+?>
+  <div class="memo-grid">
+    <?php foreach ($memories as $i => $mem) : $src = esc_url(panto_img($mem[2])); ?>
+      <a class="memo-card" data-mm data-parallax href="<?php echo $src; ?>" target="_blank" rel="noopener"
+         style="--tape: var(<?php echo $tapes[$i % 6]; ?>); --d: <?php echo ($i % 3) * 0.12; ?>s">
+        <span class="memo-photo"><img class="memo-img" src="<?php echo $src; ?>" alt="<?php echo esc_attr($mem[0]); ?>" loading="lazy" decoding="async"></span>
+        <div class="memo-txt">
+          <span class="memo-n"><?php echo sprintf('%02d', $i + 1); ?></span>
+          <h3><?php echo esc_html($mem[0]); ?></h3>
+          <p><?php echo esc_html($mem[1]); ?></p>
+          <span class="memo-more">View photo <?php echo $arrow; ?></span>
+        </div>
+      </a>
+    <?php endforeach; ?>
   </div>
+</div>
+<script>
+(function () {
+  var items = document.querySelectorAll('#collections [data-mm]');
+  if (!items.length) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) return;   // stays visible
+
+  document.documentElement.classList.add('mm-js');
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      var el = en.target;
+      if (en.isIntersecting) {
+        el.classList.remove('mm-up', 'mm-down');
+        el.classList.add('mm-in');                    // IN
+      } else {
+        el.classList.remove('mm-in');                 // OUT
+        // left through the top = scrolled down, left through the bottom = scrolled up
+        el.classList.add(en.boundingClientRect.top < 0 ? 'mm-up' : 'mm-down');
+      }
+    });
+  }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
 </section>
 
 <!-- PROJECTS -->
