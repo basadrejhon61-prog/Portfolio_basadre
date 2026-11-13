@@ -2,10 +2,11 @@
 Theme Name: Panto Design
 Author: Panto
 Description: Developer portfolio - code editor / terminal look. Monospace type, night-blue palette, window chrome, syntax colors.
-Version: 11.1
+Version: 11.14
 Text Domain: panto-design
 */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
 /* =========================================================
    1. BASE  (palette = night editor theme)
@@ -15,6 +16,7 @@ Text Domain: panto-design
   --ink-soft: #eef1ff;     /* body text (brighter) */
   --muted: #c9d0f0;        /* brighter */
   --navy: #101018;         /* deepest */
+  --black: #050505;        /* hero + marquee black */
   --bg: #16161e;
   --panel: #1a1b26;
   --panel2: #1f2335;
@@ -96,32 +98,55 @@ h1, h2, h3, h4, .section-title {
    2. HEADER (editor tab bar)
    ========================================================= */
 body header, body .site-header {
-  background: var(--navy) !important;
+  background: transparent !important;
   border-bottom: none !important;
   box-shadow: none !important;
-  position: sticky; top: 0; z-index: 9999 !important;
-  padding: 10px 0 !important;
-  transition: padding .3s ease, box-shadow .3s ease;
+  position: absolute; top: 0; left: 0; right: 0; width: 100%;   /* stays at the top of Home, scrolls away with the page */
+  z-index: 9999 !important;
+  padding: 14px 0 !important;
+  transition: padding .3s ease, background .3s ease;
 }
-body header::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
-  background: linear-gradient(90deg, var(--emerald) 0, var(--emerald) 72px, var(--line) 72px);
-}
-body header.is-scrolled { padding: 6px 0 !important; box-shadow: 0 8px 24px rgba(0, 0, 0, .45) !important; }
+body header::after { display: none; }
+body header.is-scrolled { padding: 8px 0 !important; box-shadow: none !important; }
 
-body .header-inner { display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; gap: 16px !important; }
+/* logo removed from the header: menu is centered */
+body .header-inner { display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: center !important; gap: 16px !important; }
 body a.logo { display: inline-flex !important; flex-direction: row !important; align-items: center !important; gap: 10px !important; text-decoration: none !important; }
 body a.logo img { height: 40px !important; width: auto !important; max-width: 48px !important; object-fit: contain !important; margin: 0 !important; transition: height .3s ease; }
 body header.is-scrolled a.logo img { height: 34px !important; }
 body .logo-text { display: flex !important; flex-direction: column !important; justify-content: center !important; line-height: 1.2 !important; }
 body .logo-text b { color: var(--ink) !important; font-family: var(--font) !important; font-size: 14px !important; font-weight: 700 !important; margin: 0 !important; }
 body .logo-text small { color: var(--emerald) !important; font-size: 11px !important; font-weight: 400 !important; margin: 1px 0 0 0 !important; }
+/* "Get in Touch" button: top right of the header */
+/* positioned against the full-width header, so it sits at the very right edge of the screen */
+body .header-cta {
+  position: absolute; right: clamp(16px, 3vw, 40px); top: 50%; transform: translateY(-50%);
+  display: inline-flex !important; align-items: center; justify-content: center;
+  padding: 8px 18px !important; border-radius: 999px !important;
+  font-size: 12px !important; font-weight: 700 !important; white-space: nowrap;
+  color: var(--ink) !important; background: rgba(255, 255, 255, .04) !important;
+  border: 1px solid rgba(255, 255, 255, .28) !important;
+  transition: background .2s, color .2s, border-color .2s !important;
+}
+body .header-cta:hover { background: var(--ink) !important; color: var(--black) !important; border-color: var(--ink) !important; }
 body .nav-toggle { display: none !important; }
 body .main-nav ul { display: flex !important; flex-direction: row !important; gap: 2px !important; align-items: center !important; }
-body .main-nav a { display: block !important; padding: 7px 12px !important; border-radius: 6px !important; font-size: 13px !important; font-weight: 500 !important; color: var(--ink-soft) !important; transition: background .2s, color .2s; }
-body .main-nav a::before { content: "./"; color: var(--muted); }
-body .main-nav .current-menu-item > a, body .main-nav a.active { color: var(--sky) !important; background: var(--panel2) !important; box-shadow: inset 0 -2px 0 var(--sky); }
-body .main-nav a:not(.active):hover { background-color: var(--panel2) !important; color: var(--ink) !important; }
+body .main-nav a {
+  display: block !important; position: relative;
+  padding: 9px 20px !important;                 /* wider buttons */
+  border-radius: 6px !important; font-size: 13px !important; font-weight: 500 !important;
+  color: var(--ink-soft) !important; background: transparent !important; box-shadow: none !important;
+  transition: color .2s;
+}
+/* underline: grows in under the clicked / active menu item */
+body .main-nav a::after {
+  content: ""; position: absolute; left: 20px; right: 20px; bottom: 2px; height: 2px; border-radius: 2px;
+  background: var(--sky); transform: scaleX(0); transform-origin: center;
+  transition: transform .25s var(--ease);
+}
+body .main-nav .current-menu-item > a, body .main-nav a.active { color: var(--sky) !important; background: transparent !important; box-shadow: none !important; }
+body .main-nav .current-menu-item > a::after, body .main-nav a.active::after { transform: scaleX(1); }
+body .main-nav a:not(.active):hover { background: transparent !important; color: var(--ink) !important; }
 
 /* =========================================================
    3. BUTTONS
@@ -143,52 +168,75 @@ body .btn-outline { background: transparent !important; color: var(--ink) !impor
 body .btn-outline:hover { border-color: var(--ink) !important; background: rgba(255, 255, 255, .06) !important; transform: translateY(-2px) !important; }
 
 /* =========================================================
-   4. HERO (terminal)
+   4. HERO - black sides + warm glow in the center
+      (giant "Meet the Minds Behind the Work" behind the team)
    ========================================================= */
 body .hero {
   position: relative; isolation: isolate; overflow: hidden;
-  min-height: 72vh; display: flex; align-items: center;
-  padding: clamp(80px, 12vh, 120px) 0 clamp(64px, 9vh, 90px);
-  background-color: var(--navy);
-  background-size: cover; background-position: center; text-align: left; color: #fff;
+  min-height: clamp(560px, 100vh, 820px); display: flex; align-items: flex-start; justify-content: center;
+  padding: clamp(120px, 17vh, 170px) 0 0;
+  background-color: var(--black);
+  background-size: cover; background-position: center;
+  text-align: center; color: #fff;
 }
 body .hero::before {
-  content: ""; position: absolute; inset: 0; z-index: -2;
+  content: "";
+  position: absolute; inset: 0; z-index: -2;
   background:
-    radial-gradient(600px circle at 88% 10%, rgba(187, 154, 247, .22), transparent 60%),
-    linear-gradient(115deg, rgba(16, 16, 24, .96) 0%, rgba(16, 16, 24, .86) 55%, rgba(16, 16, 24, .7) 100%);
+    linear-gradient(to top, var(--black) 0%, rgba(5, 5, 5, 0) 25%),                                   /* bottom melts into the marquee strip */
+    radial-gradient(ellipse 85% 100% at 50% 50%, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, .92) 100%),      /* black sides */
+    radial-gradient(ellipse 45% 70% at 50% 45%, rgba(190, 90, 50, .50), rgba(120, 50, 30, .18) 55%, transparent 75%), /* warm glow */
+    var(--black);
 }
-body .hero::after {
-  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background-image: linear-gradient(rgba(125, 207, 255, .06) 1px, transparent 1px), linear-gradient(90deg, rgba(125, 207, 255, .06) 1px, transparent 1px);
-  background-size: 40px 40px;
-  -webkit-mask-image: linear-gradient(90deg, #000 0%, transparent 85%);
-          mask-image: linear-gradient(90deg, #000 0%, transparent 85%);
+body .hero::after { display: none; }   /* blue grid lines removed */
+body .hero .wrap {
+  opacity: 1 !important;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
 }
-body .hero .wrap { opacity: 1 !important; }
 
-.hero-shape { position: absolute; z-index: 0; pointer-events: none; display: block; }
-.hero-shape.s1 { width: 170px; height: 170px; right: 9%; top: 16%; border-radius: 12px; border: 1px dashed rgba(125, 207, 255, .45); animation: floaty 9s ease-in-out infinite; }
-.hero-shape.s2 { width: 54px; height: 54px; right: 22%; bottom: 14%; border-radius: 6px; background: var(--emerald); opacity: .75; animation: floaty 7s ease-in-out -2s infinite; }
-.hero-shape.s3 { width: 90px; height: 90px; right: 4%; bottom: 24%; border-radius: 10px; border: 2px solid rgba(187, 154, 247, .55); transform: rotate(18deg); animation: spin 22s linear infinite; }
+/* floating squares removed from the hero */
+.hero-shape { display: none !important; }
 @keyframes floaty { 0%, 100% { translate: 0 0; } 50% { translate: 0 -16px; } }
 @keyframes spin { to { transform: rotate(378deg); } }
 @keyframes blink { 50% { opacity: 0; } }
 
-body .hero .eyebrow { display: block; font-size: .82rem; font-weight: 500; color: var(--emerald) !important; margin: 0 0 10px; text-transform: none; letter-spacing: 0; }
-body .hero .eyebrow::before { content: "$ "; color: var(--muted); }
-body .hero h1 { display: block; color: var(--ink) !important; font-size: clamp(2rem, 5.5vw, 3.3rem) !important; line-height: 1.1 !important; max-width: 16ch; margin: 0 0 16px; }
-body .hero h1::after { content: ""; display: inline-block; width: .5ch; height: .92em; margin-left: .14em; background: var(--emerald); vertical-align: -.08em; animation: blink 1.1s steps(1) infinite; }
-body .hero h1 .rvw:last-of-type .rvi { color: var(--sky) !important; }
-body .hero .lead { color: var(--ink-soft) !important; font-size: clamp(.92rem, 1.3vw, 1.02rem) !important; max-width: 52ch; margin: 0 0 24px !important; padding-left: 14px; border-left: 2px solid var(--line); }
-body .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
-body .hero-actions .btn::before { content: ">"; opacity: .6; }
-body .hero :focus-visible { outline-color: var(--emerald); }
+/* giant faded text behind the team (now an <h1>, can wrap to 2 lines) */
+.hero-ghost,
+body .hero h1.hero-ghost {
+  position: absolute; left: 0; right: 0; top: clamp(90px, 15vh, 150px); z-index: 0;
+  margin: 0; max-width: none;
+  padding-inline: clamp(16px, 4vw, 60px);
+  text-align: center; white-space: normal; text-wrap: balance;
+  pointer-events: none; user-select: none;
+  text-transform: uppercase;
+  -webkit-mask-image: linear-gradient(to bottom, #000 25%, rgba(0, 0, 0, .15) 100%);
+          mask-image: linear-gradient(to bottom, #000 25%, rgba(0, 0, 0, .15) 100%);
+}
+/* extra specificity + !important: the global h1 rules also use !important */
+body .hero h1.hero-ghost {
+  font-family: "Anton", Impact, "Arial Narrow", var(--mono) !important;
+  font-size: clamp(2.8rem, 9vw, 9rem) !important;
+  font-weight: 400 !important;
+  line-height: .95 !important;
+  letter-spacing: .01em !important;
+  color: rgba(255, 255, 255, .22) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, .22) !important;
+}
+body .hero h1.hero-ghost::after { display: none !important; }   /* no blinking cursor */
 
-.hero-stats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
-.hero-stats div { padding: 9px 16px; border-radius: 6px; background: rgba(26, 27, 38, .8); border: 1px solid var(--line); border-left: 3px solid var(--sky); }
-.hero-stats b { display: block; color: var(--ink); font-size: 1.1rem; line-height: 1.2; }
-.hero-stats span { color: var(--muted); font-size: .82rem; }
+/* team photo (transparent PNG): sits in front of the title, anchored to the bottom centre */
+.hero-team {
+  --team-h: 88%;        /* size: bigger number = bigger image */
+  --team-down: -14%;    /* position: more negative = image moves further down */
+  position: absolute; left: 50%; bottom: var(--team-down); transform: translateX(-50%);
+  height: var(--team-h); width: auto; max-width: 96%;
+  object-fit: contain; object-position: center bottom;
+  z-index: 2; pointer-events: none; user-select: none;
+  /* soft fade at the very bottom so the photo melts into the marquee strip */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 100%);
+}
+body .hero :focus-visible { outline-color: var(--emerald); }
 
 @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 
@@ -236,7 +284,7 @@ html.js .rv, .rv, .rv-title, .rv-split .rvw, .rv-split .rvi {
 /* =========================================================
    7. SKILLS MARQUEE (status-bar ticker)
    ========================================================= */
-.marquee { position: relative; z-index: 2; background: var(--navy); overflow: hidden; padding: 8px 0; border-block: 1px solid var(--line); }
+.marquee { position: relative; z-index: 2; background: var(--black); overflow: hidden; padding: 8px 0; border-block: 1px solid var(--line); }
 .mq-row { overflow: hidden; }
 .mq-track { display: flex; width: max-content; will-change: transform; }
 .mq-group { display: flex; flex-shrink: 0; }
@@ -790,19 +838,20 @@ body.is-profile-page .profile-pager b { color: var(--ink); font-size: .88rem; fo
   body .main-nav { display: none; position: absolute; top: calc(100% + 8px); left: 12px; right: 12px; z-index: 20; background: var(--panel); border: 1px solid var(--line); box-shadow: 0 12px 30px rgba(0, 0, 0, .5); border-radius: 10px; padding: 10px; }
   body .main-nav.open { display: block; }
   body .main-nav ul { flex-direction: column !important; align-items: stretch !important; }
-  body .header-inner { position: relative; }
+  body .header-inner { position: relative; justify-content: space-between !important; }
+  body .header-cta { position: static; transform: none; order: 3; }
   body .team-section .tm-grid { grid-template-columns: repeat(2, 1fr); }
   body.is-profile-page .profile-grid { grid-template-columns: 1fr !important; }
   body.is-profile-page .profile-card { position: relative !important; top: 0 !important; }
   body.is-profile-page .profile-block { padding: 18px !important; }
   .fb-grid, .fb-grid.single { grid-template-columns: 1fr; }
   .scroll-cue { display: none; }
-  .hero-shape.s1 { width: 110px; height: 110px; }
-  .hero-shape.s3 { display: none; }
 }
 @media (max-width: 600px) {
-  body .hero { min-height: 62vh; }
-  body .hero-actions .btn, .cta-actions .btn, .fb-form .btn { width: 100%; text-align: center; }
+  body .hero { min-height: 600px; }
+  .hero-team { --team-h: 72%; --team-down: -9%; }
+  body .hero h1.hero-ghost { top: 90px !important; }
+  .cta-actions .btn, .fb-form .btn { width: 100%; text-align: center; }
   body .memo-grid { grid-template-columns: 1fr; gap: 24px; }
   .lb-prev { top: auto; bottom: 18px; left: 18px; margin: 0; }
   .lb-next { top: auto; bottom: 18px; right: 18px; margin: 0; }
@@ -815,7 +864,6 @@ body.is-profile-page .profile-pager b { color: var(--ink); font-size: .88rem; fo
   body.is-profile-page .profile-pager a:last-child { justify-content: flex-start; text-align: left; }
   body.is-profile-page .role-tasks { grid-template-columns: 1fr; }
   body .logo-text small { display: none; }
-  .hero-shape.s1, .hero-shape.s2 { opacity: .35; }
   .bg-blob { filter: blur(70px); }
 }
 
@@ -829,10 +877,8 @@ body.is-profile-page .profile-pager b { color: var(--ink); font-size: .88rem; fo
   main .tag::before { color: var(--emerald) !important; }
 
   body .hero .lead, body .team-section .team-intro, body .memo-sub, body .step p, body .memo-txt p { color: var(--ink-soft) !important; }
-  body .hero h1, body .hero h1 .rvw, body .hero h1 .rvi { color: var(--ink) !important; }
-  body .hero h1 .rvw:last-of-type .rvi { color: var(--sky) !important; }
-  .hero-stats span, .ph-stats span, .profile-pager small, .fb-person small, body .slide-tag small { color: var(--muted) !important; }
-  .hero-stats b, .ph-stats b, .fb-person b, body .slide-tag b, .profile-pager b { color: var(--ink) !important; }
+  .ph-stats span, .profile-pager small, .fb-person small, body .slide-tag small { color: var(--muted) !important; }
+  .ph-stats b, .fb-person b, body .slide-tag b, .profile-pager b { color: var(--ink) !important; }
   .fb-quote, .fb-field > span { color: var(--ink) !important; }
   .fb-sub { color: var(--ink-soft) !important; }
   .lb-title { color: var(--ink) !important; } .lb-desc { color: var(--ink-soft) !important; }
@@ -905,26 +951,31 @@ body.is-profile-page .profile-pager b { color: var(--ink); font-size: .88rem; fo
   }
   .rv-split .rvi { transform: none !important; }
 
-  /* Text can never be transparent */
-  main h1, main h2, main h3, main h4, main p, main li, main span, main small, main b,
+  /* Text can never be transparent (the giant hero text is the only exception) */
+  main h1:not(.hero-ghost), main h2, main h3, main h4, main p, main li, main span, main small, main b,
   main blockquote, main label, main a, main button,
-  main h1 *, main h2 *, main h3 * {
+  main h1:not(.hero-ghost) *, main h2 *, main h3 * {
     -webkit-text-fill-color: currentColor !important;
     background-clip: border-box !important;
     -webkit-background-clip: border-box !important;
     text-shadow: none;
   }
-  main h1, main h2, main h3, main h4 { color: var(--ink) !important; }
+  main h1:not(.hero-ghost), main h2, main h3, main h4 { color: var(--ink) !important; }
   main p, main li, main small, main blockquote, main figcaption { color: var(--ink-soft) !important; }
 
   /* keep the coloured accents where they were intended */
-  body .hero h1 .rvw:last-of-type .rvi { color: var(--sky) !important; }
   main .tag, main .tag * { color: var(--muted) !important; }
   main .tag::before { color: var(--emerald) !important; }
   body .team-section .tm-role { color: var(--a) !important; }
   body .btn-dark, body .team-section .tm-btn, body .filters .pill.active,
   body .slider-ui button { color: var(--on) !important; }
   body .btn-light { color: var(--sky) !important; }
+
+  /* giant hero text: keep the soft white (placed last so nothing above overrides it) */
+  body .hero h1.hero-ghost {
+    color: rgba(255, 255, 255, .22) !important;
+    -webkit-text-fill-color: rgba(255, 255, 255, .22) !important;
+  }
 
   /* Marquee, header, footer */
   .mq-item, .mq-outline .mq-item { color: var(--ink) !important; opacity: 1 !important; }
@@ -964,4 +1015,609 @@ body.is-profile-page .profile-pager b { color: var(--ink); font-size: .88rem; fo
 
 @media screen and (max-width: 600px) {
   body .slider { grid-template-columns: 1fr; }
+}
+
+/* header is transparent and sits on top of the page: leave room for it on the profile page */
+@media screen {
+  body.is-profile-page .profile { padding-top: 110px !important; }
+}
+
+/* =========================================================
+   16. SAME BLACK BACKGROUND AS THE HOME HERO (keep at the very end)
+   ========================================================= */
+@media screen {
+  html, body, body.is-profile-page { background-color: var(--black) !important; }
+
+  /* same look as the home hero: black sides + warm brown glow in the middle */
+  body .team-section,
+  body .intro,
+  body .gallery,
+  body .steps,
+  body .testimonials,
+  body .cta {
+    background:
+      radial-gradient(ellipse 85% 100% at 50% 50%, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, .92) 100%),
+      radial-gradient(ellipse 50% 70% at 50% 50%, rgba(190, 90, 50, .38), rgba(120, 50, 30, .14) 55%, transparent 78%),
+      var(--black) !important;
+  }
+  body.is-profile-page .profile,
+  body footer.site-footer,
+  .marquee {
+    background: var(--black) !important;
+  }
+  body.is-profile-page .profile { background: transparent !important; }
+
+  /* remove the photo / dots / glows that tinted each section */
+  body .team-section::before { background: none !important; }
+  body .intro::before,
+  body .cta::before,
+  body .cta::after,
+  .memo-deco { display: none !important; }
+  body.is-profile-page::before {
+    background:
+      radial-gradient(ellipse 85% 100% at 50% 50%, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, .92) 100%),
+      radial-gradient(ellipse 50% 70% at 50% 50%, rgba(190, 90, 50, .38), rgba(120, 50, 30, .14) 55%, transparent 78%),
+      var(--black) !important;
+  }
+
+  /* thin divider so the black sections still read as separate blocks */
+  body .team-section,
+  body .intro,
+  body .gallery,
+  body .steps,
+  body .testimonials,
+  body .cta { border-block: 1px solid rgba(255, 255, 255, .06) !important; }
+
+  /* the floating blobs / grid stay hidden behind the black */
+  .bg-fx { display: none; }
+}
+
+/* =========================================================
+   17. MEMORIES: photo fills the card, text sits on a blurred glass strip
+   ========================================================= */
+body .memo-card { background: transparent !important; }
+body .memo-card .memo-photo { aspect-ratio: 5 / 6; }
+body .memo-card .memo-txt {
+  position: absolute; left: 10px; right: 10px; bottom: 10px; z-index: 2;
+  padding: 12px 14px 13px;
+  background: transparent;
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+  border: 0;
+  border-radius: 0;
+}
+/* soft fade at the bottom of the photo so the text stays readable (no card) */
+body .memo-card .memo-photo::after {
+  content: ""; position: absolute; inset: auto 0 0 0; height: 55%; z-index: 1; pointer-events: none;
+  background: linear-gradient(to top, rgba(0, 0, 0, .75), rgba(0, 0, 0, 0));
+}
+body .memo-card .memo-txt h3,
+body .memo-card .memo-txt p { text-shadow: 0 1px 8px rgba(0, 0, 0, .8); }
+
+/* =========================================================
+   18. TEAM CARDS: match the black / warm-glow background
+   ========================================================= */
+body .team-section .tm-card {
+  background: rgba(8, 8, 10, .72) !important;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, .10) !important;
+  border-top: 2px solid var(--a) !important;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .6) !important;
+}
+body .team-section .tm-card::before {
+  background:
+    radial-gradient(circle at 15px 50%, var(--rose) 4px, transparent 5px),
+    radial-gradient(circle at 31px 50%, var(--sun) 4px, transparent 5px),
+    radial-gradient(circle at 47px 50%, var(--emerald) 4px, transparent 5px),
+    #050505 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, .08) !important;
+}
+body .team-section .tm-photo { background: #0b0b0d; }
+body .team-section .tm-photo::after { background: linear-gradient(180deg, transparent, rgba(5, 5, 5, .85)); }
+body .team-section .tm-body { background: transparent !important; }
+body .team-section .tm-role { background: color-mix(in srgb, var(--a) 14%, #0a0a0a) !important; }
+body .team-section .tm-card:hover {
+  border-color: var(--a) !important;
+  box-shadow: 0 0 0 1px var(--a), 0 18px 40px rgba(0, 0, 0, .7), 0 0 36px color-mix(in srgb, var(--a) 22%, transparent) !important;
+}
+
+/* remove the three-dot title bar and the #01 number on the Memories cards */
+body .memo-card::before { display: none !important; }
+body .memo-card .memo-n { display: none !important; }
+
+/* =========================================================
+   19. TEAM SHOWCASE: one member at a time, arrows left / right
+   ========================================================= */
+body .team-section .tm-showcase {
+  display: grid; align-items: center; gap: 14px clamp(10px, 2vw, 22px);
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: "prev stage next" ". dots .";
+}
+body .team-section .tm-prev { grid-area: prev; }
+body .team-section .tm-next { grid-area: next; }
+body .team-section .tm-stage { grid-area: stage; position: relative; display: grid; min-width: 0; }
+body .team-section .tm-dots  { grid-area: dots; display: flex; justify-content: center; gap: 8px; }
+
+/* arrows */
+body .team-section .tm-nav {
+  width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
+  color: var(--ink); background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .22);
+  transition: background .2s, color .2s, border-color .2s, transform .2s;
+}
+body .team-section .tm-nav svg { width: 20px; height: 20px; }
+body .team-section .tm-nav:hover { background: var(--ink); color: var(--black); border-color: var(--ink); transform: scale(1.08); }
+
+/* dots */
+body .team-section .tm-dots button {
+  width: 9px; height: 9px; padding: 0; border: 0; border-radius: 99px; cursor: pointer;
+  background: rgba(255, 255, 255, .25); transition: width .3s var(--ease), background .2s;
+}
+body .team-section .tm-dots button.active { width: 28px; background: var(--emerald); }
+
+/* the member card */
+body .team-section .tm-slide {
+  --a: var(--cobalt);
+  grid-area: 1 / 1; display: grid; grid-template-columns: minmax(220px, 360px) 1fr;
+  gap: clamp(20px, 4vw, 48px); align-items: center;
+  padding: clamp(18px, 3vw, 32px);
+  border-radius: 14px;
+  background: rgba(8, 8, 10, .72);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, .10); border-top: 2px solid var(--a);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .6);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .5s ease, transform .6s var(--ease), visibility .5s;
+}
+body .team-section .tm-slide.show { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
+body .team-section .tm-slide.pre-r, body .team-section .tm-slide.out-r { transform: translateX(70px); }
+body .team-section .tm-slide.pre-l, body .team-section .tm-slide.out-l { transform: translateX(-70px); }
+
+body .team-section .tm-pic {
+  position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 10px; background: #0b0b0d;
+  box-shadow: 0 0 0 2px var(--a), 0 18px 40px rgba(0, 0, 0, .55);
+}
+body .team-section .tm-pic img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+body .team-section .tm-slide.show .tm-pic img { animation: tmZoom 1s var(--ease) both; }
+@keyframes tmZoom { from { transform: scale(1.14); } to { transform: none; } }
+
+body .team-section .tm-info { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; min-width: 0; }
+body .team-section .tm-slide.show .tm-info > * { animation: rise .6s var(--ease) both; }
+body .team-section .tm-slide.show .tm-info > :nth-child(2) { animation-delay: .06s; }
+body .team-section .tm-slide.show .tm-info > :nth-child(3) { animation-delay: .12s; }
+body .team-section .tm-slide.show .tm-info > :nth-child(4) { animation-delay: .18s; }
+body .team-section .tm-slide.show .tm-info > :nth-child(5) { animation-delay: .24s; }
+body .team-section .tm-slide.show .tm-info > :nth-child(6) { animation-delay: .30s; }
+
+body .team-section .tm-count { font-size: .82rem; font-weight: 700; color: var(--muted) !important; margin: 0; }
+body .team-section .tm-count::before { content: "// "; color: var(--emerald); }
+body .team-section .tm-title { font-size: clamp(1.4rem, 3vw, 2.2rem) !important; line-height: 1.15 !important; margin: 0 !important; }
+body .team-section .tm-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: .85rem; font-weight: 700; padding: 4px 12px; border-radius: 4px;
+  color: var(--a) !important; background: color-mix(in srgb, var(--a) 14%, #0a0a0a);
+  border: 1px solid color-mix(in srgb, var(--a) 35%, transparent);
+}
+body .team-section .tm-badge svg { width: 14px; height: 14px; flex: none; }
+body .team-section .tm-about-title { font-size: .9rem !important; margin: 6px 0 0 !important; color: var(--sky) !important; }
+body .team-section .tm-about-title::before { content: "> "; color: var(--emerald); }
+body .team-section .tm-about { font-family: var(--sans); font-size: .98rem; line-height: 1.75; max-width: 60ch; margin: 0; }
+body .team-section .tm-skill-list { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin-top: 4px; }
+body .team-section .tm-skill-list li {
+  font-size: .8rem; font-weight: 700; padding: 4px 11px; border-radius: 4px;
+  color: var(--a) !important; background: color-mix(in srgb, var(--a) 12%, #0a0a0a);
+  border: 1px solid color-mix(in srgb, var(--a) 30%, transparent);
+}
+body .team-section .tm-skill-list li::before { content: "#"; opacity: .7; margin-right: 2px; }
+
+/* only one member: no arrows or dots */
+body .team-section .tm-showcase.single .tm-nav,
+body .team-section .tm-showcase.single .tm-dots { display: none; }
+
+@media (max-width: 760px) {
+  body .team-section .tm-showcase {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "stage stage" "prev next" "dots dots";
+  }
+  body .team-section .tm-prev { justify-self: start; }
+  body .team-section .tm-next { justify-self: end; }
+  body .team-section .tm-slide { grid-template-columns: 1fr; }
+  body .team-section .tm-pic { max-width: 320px; margin-inline: auto; width: 100%; }
+  body .team-section .tm-dots { grid-row: auto; }
+}
+
+/* =========================================================
+   20. FORMAL STYLE: profile page + team showcase
+       no cards, no coloured borders, no code-style symbols, normal font
+   ========================================================= */
+
+/* ---------- team showcase ---------- */
+body .team-section .tm-showcase { font-family: var(--sans); }
+body .team-section .tm-title,
+body .team-section .tm-about-title { font-family: var(--sans) !important; }
+body .team-section .tm-slide {
+  background: transparent; border: 0; border-radius: 0; box-shadow: none; padding: 0;
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+body .team-section .tm-pic { box-shadow: none; }
+body .team-section .tm-count::before,
+body .team-section .tm-about-title::before,
+body .team-section .tm-skill-list li::before { content: none; }
+body .team-section .tm-count { letter-spacing: .04em; }
+body .team-section .tm-badge { background: none; border: 0; padding: 0; color: var(--muted) !important; font-weight: 500; }
+body .team-section .tm-about-title { color: var(--ink) !important; font-size: 1rem !important; }
+body .team-section .tm-skill-list li {
+  background: rgba(255, 255, 255, .07); border: 0; border-radius: 999px;
+  color: var(--ink-soft) !important; font-weight: 500; padding: 5px 13px;
+}
+body .team-section .tm-dots button.active { background: var(--ink); }
+
+/* ---------- profile page ---------- */
+body.is-profile-page .profile { --font: var(--sans); --mono: var(--sans); font-family: var(--sans); }
+body.is-profile-page .profile .profile-grid { grid-template-columns: minmax(260px, 360px) 1fr !important; gap: clamp(28px, 5vw, 64px) !important; }
+body.is-profile-page .profile .profile-main { gap: 36px !important; }
+
+/* cards removed */
+body.is-profile-page .profile .profile-card,
+body.is-profile-page .profile .profile-block,
+body.is-profile-page .profile .profile-hero {
+  background: transparent !important; background-image: none !important;
+  border: 0 !important; border-radius: 0 !important; box-shadow: none !important;
+  padding: 0 !important;
+}
+body.is-profile-page .profile .profile-card::before,
+body.is-profile-page .profile .profile-block::before,
+body.is-profile-page .profile .profile-block::after,
+body.is-profile-page .profile .profile-hero::after,
+body.is-profile-page .profile .ph-shape { display: none !important; }
+
+/* photo */
+body.is-profile-page .profile .profile-photo {
+  width: 100% !important; height: auto !important; aspect-ratio: 4 / 5; margin: 0 !important;
+  border: 0 !important; border-radius: 10px !important; box-shadow: none !important;
+}
+body.is-profile-page .profile .profile-info { padding: 20px 0 0 !important; text-align: left; }
+body.is-profile-page .profile .profile-info h1 { font-size: 1.5rem !important; }
+
+/* role labels: plain text */
+body.is-profile-page .profile .profile-info .role,
+body.is-profile-page .profile .ph-role {
+  background: none !important; border: 0 !important; border-radius: 0; padding: 0 !important;
+  color: var(--muted) !important; font-weight: 500 !important; font-size: .95rem !important;
+}
+
+/* contact */
+body.is-profile-page .profile .contact { gap: 14px !important; }
+body.is-profile-page .profile .contact li { background: none !important; border: 0 !important; padding: 0 !important; }
+body.is-profile-page .profile .contact li .ci { background: none !important; color: var(--muted) !important; width: 24px; height: 24px; }
+body.is-profile-page .profile .contact b { font-size: .75rem !important; }
+body.is-profile-page .profile .contact b::after { content: none; }
+body.is-profile-page .profile .contact a { color: var(--ink) !important; font-weight: 500; }
+
+/* buttons */
+body.is-profile-page .profile .profile-btn { background: var(--ink) !important; color: var(--black) !important; border: 0 !important; border-radius: 999px !important; }
+body.is-profile-page .profile .profile-btn:hover { background: #fff !important; box-shadow: none !important; }
+body.is-profile-page .profile .profile-btn.btn-copy { background: transparent !important; color: var(--ink) !important; border: 1px solid rgba(255, 255, 255, .28) !important; }
+body.is-profile-page .profile .profile-btn.btn-copy:hover { background: transparent !important; border-color: var(--ink) !important; color: var(--ink) !important; }
+body.is-profile-page .profile .back-link { background: none !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; color: var(--muted) !important; font-weight: 500 !important; }
+body.is-profile-page .profile .back-link:hover { background: none !important; color: var(--ink) !important; }
+
+/* greeting */
+body.is-profile-page .profile .ph-label { color: var(--muted) !important; font-weight: 500; }
+body.is-profile-page .profile .ph-label::before { content: none !important; }
+body.is-profile-page .profile .ph-hello { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+body.is-profile-page .profile .ph-hello::after { display: none !important; }
+body.is-profile-page .profile .ph-stats div { background: none; border: 0; padding: 0 24px 0 0; }
+
+/* section blocks */
+body.is-profile-page .profile .profile-block h2 { font-size: 1.15rem !important; }
+body.is-profile-page .profile .profile-block h2 .ico { background: none !important; color: var(--muted) !important; width: 22px; height: 22px; }
+body.is-profile-page .profile .role-tasks li { background: none !important; border: 0 !important; padding: 2px 0 2px 18px !important; font-size: .92rem; }
+body.is-profile-page .profile .role-tasks li::before {
+  content: "\2022"; background: none !important; border-radius: 0; width: auto; height: auto;
+  left: 0; top: 2px; color: var(--muted); font-size: 1rem; line-height: 1.4;
+}
+body.is-profile-page .profile .edu li::before { width: 6px; height: 6px; left: 2px; top: 9px; border: 0 !important; border-radius: 50%; background: var(--muted) !important; box-shadow: none !important; }
+body.is-profile-page .profile .edu li::after { left: 4px; top: 20px; background: rgba(255, 255, 255, .12); }
+body.is-profile-page .profile .edu small { background: none !important; padding: 0 !important; color: var(--muted) !important; font-weight: 500 !important; }
+
+/* skills: neutral pills */
+body.is-profile-page .profile .skills li {
+  background: rgba(255, 255, 255, .07) !important; color: var(--ink-soft) !important;
+  border: 0 !important; border-radius: 999px !important; font-weight: 500 !important; padding: 6px 14px !important;
+}
+body.is-profile-page .profile .skills li::before { content: none !important; }
+body.is-profile-page .profile .skills li:hover { background: rgba(255, 255, 255, .16) !important; color: var(--ink) !important; transform: none !important; }
+
+/* previous / next member */
+body.is-profile-page .profile .profile-pager a { background: none !important; border: 0 !important; box-shadow: none !important; border-radius: 0; padding: 12px 0 !important; }
+body.is-profile-page .profile .profile-pager a:hover { transform: none; box-shadow: none !important; }
+body.is-profile-page .profile .profile-pager svg { color: var(--muted); }
+
+@media (max-width: 960px) {
+  body.is-profile-page .profile .profile-grid { grid-template-columns: 1fr !important; }
+  body.is-profile-page .profile .profile-photo { max-width: 360px; }
+}
+
+/* =========================================================
+   21. TEAM HEADING: centered title only (no tag, no intro, no member number)
+   ========================================================= */
+body .team-section .team-head { align-items: center; text-align: center; max-width: none; margin-bottom: 36px; }
+body .team-section .team-head .tag,
+body .team-section .team-head .team-intro { display: none !important; }
+body .team-section .team-head .section-title { max-width: none; text-align: center; }
+body .team-section .team-head .section-title::before { content: none; }
+body .team-section .team-head .section-title::after { margin-inline: auto; }
+body .team-section .tm-count { display: none !important; }
+body .memo-card .memo-txt p { margin-bottom: 8px; }
+
+/* =========================================================
+   22. TEAM SECTION: light "portfolio hero" look
+       (big name, blue last name, round photo, side info, avatars)
+   ========================================================= */
+body main .team-section {
+  --blue: #1f4fd8;
+  --sage: #a9b6a0;
+  --t-ink: #15161a;
+  --t-soft: #4a4e5a;
+  --t-line: rgba(0, 0, 0, .14);
+  padding: clamp(56px, 8vw, 96px) 0 !important;
+  border-block: 0 !important;
+  background:
+    radial-gradient(ellipse 60% 70% at 70% 45%, #ffffff, transparent 70%),
+    #eceeef !important;
+}
+
+/* heading */
+body main .team-section .team-head .section-title,
+body main .team-section .team-head .section-title .rvw,
+body main .team-section .team-head .section-title .rvi {
+  color: var(--t-ink) !important;
+  -webkit-text-fill-color: var(--t-ink) !important;
+}
+body main .team-section .team-head .section-title::after { background: var(--blue); }
+
+/* card = no box, two columns: text left, photo right */
+body main .team-section .tm-slide {
+  position: relative;
+  grid-template-columns: minmax(0, 1.15fr) minmax(240px, .85fr);
+  gap: clamp(24px, 5vw, 64px);
+  padding: 0 clamp(0px, 12vw, 160px) 0 0;
+}
+body main .team-section .tm-info { order: 1; gap: 0; }
+body main .team-section .tm-pic  { order: 2; }
+
+/* round photo with sage background + thin ring */
+body main .team-section .tm-pic {
+  aspect-ratio: 1; width: 100%; max-width: 420px; margin-inline: auto;
+  border-radius: 50%; background: var(--sage);
+  box-shadow: 0 0 0 8px rgba(255, 255, 255, .85), 0 30px 60px rgba(0, 0, 0, .18);
+  outline: 1px solid rgba(31, 79, 216, .35); outline-offset: 22px;
+}
+body main .team-section .tm-pic img { object-position: center top; }
+
+/* text */
+body main .team-section .tm-hello {
+  font-family: var(--sans); font-size: 1rem; margin: 0 0 6px !important;
+  color: var(--t-ink) !important;
+}
+body main .team-section .tm-title {
+  font-family: var(--sans) !important; text-transform: uppercase;
+  font-size: clamp(2rem, 5.4vw, 4.2rem) !important; line-height: 1.02 !important;
+  font-weight: 800 !important; letter-spacing: .01em !important;
+  margin: 0 !important;
+}
+body main .team-section .tm-title .tm-first { color: var(--t-ink) !important; }
+body main .team-section .tm-title .tm-last  { color: var(--blue) !important; }
+
+body main .team-section .tm-badge {
+  margin-top: 18px; padding: 0; background: none; border: 0;
+  font-family: var(--sans); font-size: .85rem; font-weight: 500;
+  text-transform: uppercase; letter-spacing: .38em;
+  color: var(--t-soft) !important;
+}
+body main .team-section .tm-line {
+  display: block; width: 38px; height: 2px; margin: 22px 0 20px;
+  background: linear-gradient(90deg, var(--blue), transparent);
+}
+body main .team-section .tm-about {
+  font-size: 1rem; line-height: 1.75; max-width: 46ch;
+  color: var(--t-soft) !important;
+}
+
+/* skills */
+body main .team-section .tm-skill-list { margin-top: 18px; }
+body main .team-section .tm-skill-list li {
+  background: rgba(0, 0, 0, .06); color: var(--t-ink) !important;
+  font-family: var(--sans); font-size: .78rem; font-weight: 500;
+  padding: 5px 13px; border-radius: 999px;
+}
+
+/* blue button */
+body main .team-section .tm-actions { margin-top: 28px; }
+body main .team-section .tm-cta {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 14px 28px; border-radius: 4px;
+  font-family: var(--sans); font-size: .8rem; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: #fff !important; background: var(--blue);
+  box-shadow: 0 10px 24px rgba(31, 79, 216, .3);
+  transition: transform .2s, box-shadow .2s, background .2s;
+}
+body main .team-section .tm-cta svg { width: 16px; height: 16px; transition: transform .2s; }
+body main .team-section .tm-cta:hover { background: #183fb0; transform: translateY(-2px); box-shadow: 0 14px 30px rgba(31, 79, 216, .38); }
+body main .team-section .tm-cta:hover svg { transform: translateX(4px); }
+
+/* side info panel (right edge) */
+body main .team-section .tm-side {
+  position: absolute; right: 0; top: 50%; translate: 0 -50%;
+  display: flex; flex-direction: column; gap: 4px; width: 150px;
+  padding: 16px 0 16px 16px; border-left: 1px solid var(--t-line);
+  font-family: var(--sans);
+}
+body main .team-section .tm-side small {
+  font-size: .62rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--t-soft) !important;
+}
+body main .team-section .tm-side b {
+  font-size: .85rem; margin-bottom: 12px; color: var(--t-ink) !important; font-weight: 600;
+}
+
+/* arrows (light) */
+body main .team-section .tm-nav {
+  color: var(--t-ink); background: #fff; border: 1px solid var(--t-line);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, .08);
+}
+body main .team-section .tm-nav:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+/* avatars instead of dots */
+body main .team-section .tm-dots { gap: 10px; align-items: center; }
+body main .team-section .tm-dots button,
+body main .team-section .tm-dots button.active {
+  width: 42px; height: 42px; padding: 0; border-radius: 50%; overflow: hidden;
+  background: #ddd; border: 2px solid #fff; opacity: .55;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .15);
+  transition: opacity .2s, transform .2s, box-shadow .2s;
+}
+body main .team-section .tm-dots button img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+body main .team-section .tm-dots button:hover { opacity: .9; transform: translateY(-2px); }
+body main .team-section .tm-dots button.active { opacity: 1; box-shadow: 0 0 0 2px var(--blue); }
+
+/* tablet / phone */
+@media (max-width: 960px) {
+  body main .team-section .tm-slide { padding-right: 0; }
+  body main .team-section .tm-side { display: none; }
+}
+@media (max-width: 760px) {
+  body main .team-section .tm-slide { grid-template-columns: 1fr; text-align: center; }
+  body main .team-section .tm-pic  { order: 1; max-width: 280px; outline-offset: 14px; }
+  body main .team-section .tm-info { order: 2; align-items: center; }
+  body main .team-section .tm-line { margin-inline: auto; }
+  body main .team-section .tm-skill-list { justify-content: center; }
+}
+
+/* =========================================================
+   23. HOME HERO: white background + black text
+       (matches the light "portfolio hero" style of section 22)
+   ========================================================= */
+body main .hero {
+  --h-blue: #1f4fd8;
+  --h-sage: #a9b6a0;
+  --h-ink: #15161a;
+  background-color: #eceeef !important;
+  color: var(--h-ink);
+}
+body main .hero::before {
+  background:
+    linear-gradient(to top, #eceeef 0%, rgba(236, 238, 239, 0) 22%),
+    radial-gradient(ellipse 60% 70% at 50% 45%, #ffffff, rgba(255, 255, 255, 0) 72%),
+    #eceeef !important;
+}
+/* soft sage circle + thin ring behind the team, like the reference */
+body main .hero::after {
+  display: block !important; content: "";
+  position: absolute; left: 50%; bottom: -18%; z-index: -1;
+  width: min(64vw, 660px); aspect-ratio: 1; transform: translateX(-50%);
+  border-radius: 50%; background: var(--h-sage); opacity: .55;
+  outline: 1px solid rgba(31, 79, 216, .35); outline-offset: 22px;
+  pointer-events: none;
+}
+
+/* giant text: black */
+body main .hero h1.hero-ghost {
+  color: var(--h-ink) !important;
+  -webkit-text-fill-color: var(--h-ink) !important;
+  -webkit-mask-image: linear-gradient(to bottom, #000 35%, rgba(0, 0, 0, .35) 100%);
+          mask-image: linear-gradient(to bottom, #000 35%, rgba(0, 0, 0, .35) 100%);
+}
+body main .hero :focus-visible { outline-color: var(--h-blue); }
+
+/* skills marquee: white strip, black text */
+body main .marquee { background: #ffffff !important; border-block: 1px solid rgba(0, 0, 0, .12); }
+body main .marquee .mq-item,
+body main .marquee .mq-outline .mq-item { color: var(--h-ink, #15161a) !important; }
+body main .marquee .mq-outline .mq-item { color: #4a4e5a !important; }
+body main .marquee .mq-item::after { color: #1f4fd8; }
+
+/* header (home page only): dark text, blue active, dark outline button */
+body:not(.is-profile-page) header .logo-text b { color: #15161a !important; }
+body:not(.is-profile-page) header .main-nav a { color: #15161a !important; }
+body:not(.is-profile-page) header .main-nav a:not(.active):hover { color: #1f4fd8 !important; }
+body:not(.is-profile-page) header .main-nav a.active,
+body:not(.is-profile-page) header .main-nav .current-menu-item > a { color: #1f4fd8 !important; }
+body:not(.is-profile-page) header .main-nav a::after { background: #1f4fd8; }
+body:not(.is-profile-page) header .header-cta {
+  color: #15161a !important; background: transparent !important;
+  border: 1px solid rgba(0, 0, 0, .35) !important;
+}
+body:not(.is-profile-page) header .header-cta:hover {
+  background: #15161a !important; color: #fff !important; border-color: #15161a !important;
+}
+body:not(.is-profile-page) header .nav-toggle { color: #15161a; }
+
+@media (max-width: 960px) {
+  body:not(.is-profile-page) header .main-nav {
+    background: #fff; border: 1px solid rgba(0, 0, 0, .12); box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
+  }
+}
+
+/* =========================================================
+   24. TEAM: name on ONE straight line + photo moved up
+   ========================================================= */
+body main .team-section .tm-slide {
+  grid-template-columns: minmax(0, 1.5fr) minmax(220px, .8fr);
+  gap: clamp(20px, 3vw, 40px);
+  padding-right: 0;
+}
+body main .team-section .tm-slide .tm-title {
+  white-space: nowrap;
+  font-size: clamp(1.3rem, 2.6vw, 2.6rem) !important;
+  letter-spacing: 0 !important;
+}
+body main .team-section .tm-slide .tm-title .tm-first,
+body main .team-section .tm-slide .tm-title .tm-last { display: inline; }
+
+/* photo up a little (change -32px for more / less) */
+body main .team-section .tm-pic { translate: 0 -32px; }
+
+/* side panel overlapped the photo, so it is hidden */
+body main .team-section .tm-side { display: none; }
+
+@media (max-width: 760px) {
+  body main .team-section .tm-slide { grid-template-columns: 1fr; }
+  body main .team-section .tm-slide .tm-title { white-space: normal; font-size: clamp(1.6rem, 7vw, 2.2rem) !important; }
+  body main .team-section .tm-pic { translate: none; }
+}
+
+/* =========================================================
+   25. TEAM: photo moved left (away from the right arrow)
+   ========================================================= */
+body main .team-section .tm-slide .tm-pic {
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: clamp(40px, 9vw, 130px);   /* bigger number = photo moves further left */
+}
+@media (max-width: 760px) {
+  body main .team-section .tm-slide .tm-pic { margin-inline: auto; max-width: 280px; }
+}
+
+/* =========================================================
+   26. TEAM: social icons (Facebook, Twitter, Instagram, TikTok)
+   ========================================================= */
+body main .team-section .tm-social {
+  display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; list-style: none;
+}
+body main .team-section .tm-social li { padding: 0; background: none; border: 0; }
+body main .team-section .tm-social a {
+  display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%;
+  color: #15161a !important; background: rgba(0, 0, 0, .06);
+  transition: background .2s, color .2s, transform .2s, box-shadow .2s;
+}
+body main .team-section .tm-social a svg { width: 18px; height: 18px; }
+body main .team-section .tm-social a:hover {
+  background: #1f4fd8; color: #fff !important; transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(31, 79, 216, .3);
+}
+@media (max-width: 760px) {
+  body main .team-section .tm-social { justify-content: center; }
 }

@@ -7,6 +7,11 @@
  * image  = filename sa picture sa imong theme images folder
  * resume = filename sa PDF sa "resume" folder sa theme (pananglitan 'basadre-resume.pdf').
  *          Kung gibiyaan nga '', dili mogawas ang Download Resume button.
+ *
+ * SOCIAL LINKS (facebook, twitter, instagram, tiktok):
+ *          Ibutang ang tibuok link sa profile sa member, pananglitan
+ *          'facebook' => 'https://facebook.com/jhon.basadre'
+ *          Kung gibiyaan nga '', mo-dim ang icon ug dili ma-click.
  */
 if (!function_exists('occ_get_team')) {
 function occ_get_team() {
@@ -27,6 +32,10 @@ return [
     ],
     'skills'    => ['Web Development', 'PHP', 'JavaScript', 'HTML & CSS', 'MySQL'],
     'resume'    => '',
+    'facebook'  => 'https://www.facebook.com/share/1d4an9edo1/',  
+    'twitter'   => '',   // https://twitter.com/...
+    'instagram' => '',   // https://instagram.com/...
+    'tiktok'    => '',   // https://tiktok.com/@...
   ],
 
   'cachero' => [
@@ -43,6 +52,10 @@ return [
     ],
     'skills'    => ['Web Development', 'Database', 'UI Design'],
     'resume'    => '',
+    'facebook'  => 'https://www.facebook.com/justine.cachero.73',
+    'twitter'   => '',
+    'instagram' => '',
+    'tiktok'    => '',
   ],
 
   'campion' => [
@@ -59,6 +72,10 @@ return [
     ],
     'skills'    => ['Web Development', 'Networking', 'Graphic Design'],
     'resume'    => '',
+    'facebook'  => '',
+    'twitter'   => '',
+    'instagram' => '',
+    'tiktok'    => '',
   ],
 
   'muego' => [
@@ -75,6 +92,10 @@ return [
     ],
     'skills'    => ['Web Development', 'Programming', 'Documentation'],
     'resume'    => '',
+    'facebook'  => '',
+    'twitter'   => '',
+    'instagram' => '',
+    'tiktok'    => '',
   ],
 
 ];

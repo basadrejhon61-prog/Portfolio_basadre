@@ -21,6 +21,16 @@ $icon  = function ($path) {
   return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' . $path . '</svg>';
 };
 
+/* Social icons shown under the skills (Facebook, Twitter, Instagram, TikTok).
+   Links come from team-data.php: 'facebook', 'twitter', 'instagram', 'tiktok'
+   (or inside a 'social' => [...] array). Missing link = the icon points to "#". */
+$socials = [
+  'facebook'  => ['Facebook',  '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg>'],
+  'twitter'   => ['Twitter',   '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.29 3.9A12.15 12.15 0 0 1 3.07 4.8a4.28 4.28 0 0 0 1.33 5.71 4.27 4.27 0 0 1-1.94-.54v.05a4.28 4.28 0 0 0 3.43 4.2 4.3 4.3 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.97A8.6 8.6 0 0 1 2 19.54a12.1 12.1 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2l-.01-.56A8.7 8.7 0 0 0 22.46 6z"/></svg>'],
+  'instagram' => ['Instagram', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>'],
+  'tiktok'    => ['TikTok',    '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.6 2.6 0 0 1-2.6-2.6 2.6 2.6 0 0 1 2.6-2.6c.27 0 .53.04.77.12V9.66a5.7 5.7 0 0 0-.77-.05A5.69 5.69 0 0 0 4.17 15.3a5.69 5.69 0 0 0 5.69 5.69 5.69 5.69 0 0 0 5.69-5.69V9.01a7.35 7.35 0 0 0 4.29 1.37V7.3a4.3 4.3 0 0 1-3.24-1.48z"/></svg>'],
+];
+
 /* Skills for the marquee: collected from every member's profile (no duplicates) */
 $skills = [];
 foreach ($team_members as $mm) {
@@ -61,24 +71,11 @@ $quote_icon = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><
 <main id="main">
 
 <!-- HERO -->
-<section class="hero" style="background-image:url('<?php echo esc_url(panto_img('opol.jpg')); ?>')">
-  <span class="hero-shape s1" aria-hidden="true"></span>
-  <span class="hero-shape s2" aria-hidden="true"></span>
-  <span class="hero-shape s3" aria-hidden="true"></span>
-  <div class="wrap">
-    <p class="eyebrow">Welcome to</p>
-    <h1 class="rv-title" style="--ws:.09s">Our Portfolio</h1>
-    <p class="lead">We are a team of BSIT students passionate about web development, system design, and creating digital solutions.</p>
-    <div class="hero-actions">
-      <a class="btn btn-dark" href="#projects">View our projects</a>
-      <a class="btn btn-light" href="#team">Meet the team</a>
-    </div>
-    <div class="hero-stats">
-      <div><b><?php echo count($team_members); ?></b><span>Team members</span></div>
-      <div><b><?php echo count($skills); ?>+</b><span>Skills</span></div>
-      <div><b>BSIT</b><span>Course</span></div>
-    </div>
-  </div>
+<section class="hero">
+  <!-- giant faded word behind the team -->
+  <h1 class="hero-ghost">Meet the Minds Behind the Work</h1>
+
+  <img class="hero-team" src="<?php echo esc_url(panto_img('team.png')); ?>" alt="Our team" decoding="async">
 </section>
 
 <!-- SKILLS MARQUEE (speeds up and reverses with your scroll) -->
@@ -97,34 +94,150 @@ $quote_icon = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><
   </div>
 </div>
 
-<!-- TEAM -->
+<!-- TEAM (one member at a time, arrows left / right) -->
 <section class="team-section" id="team">
   <span class="ghost" aria-hidden="true">TEAM</span>
   <div class="wrap">
     <div class="team-head">
-      <p class="tag rv">01 &middot; The team</p>
       <h2 class="section-title rv-title">Meet our team</h2>
-      <p class="team-intro rv">Each member has a role in our capstone project. Open a profile to see their responsibilities.</p>
     </div>
 
-    <div class="tm-grid">
-      <?php foreach ($team_members as $slug => $m) :
-        $rm = occ_role_meta($m['role'] ?? ''); ?>
-        <article class="tm-card rv" style="--a: var(<?php echo esc_attr($rm['color']); ?>)">
-          <div class="tm-photo">
-            <img src="<?php echo esc_url(panto_img($m['image'])); ?>" alt="<?php echo esc_attr($m['name']); ?>" loading="lazy" decoding="async">
-          </div>
-          <div class="tm-body">
-            <h3 class="tm-name"><?php echo esc_html($m['name']); ?></h3>
-            <p class="tm-role"><?php echo $icon($rm['icon']); ?> <?php echo esc_html($rm['label']); ?></p>
-            <a class="tm-btn" href="<?php echo esc_url(add_query_arg('member', $slug, home_url('/'))); ?>">
-              View profile <span class="screen-reader-text">of <?php echo esc_html($m['name']); ?></span> <?php echo $arrow; ?>
-            </a>
-          </div>
-        </article>
-      <?php endforeach; ?>
+    <?php $tm_total = count($team_members); $tm_i = 0; ?>
+    <div class="tm-showcase" data-tm role="region" aria-roledescription="carousel" aria-label="Team members">
+
+      <button type="button" class="tm-nav tm-prev" aria-label="Previous member"><?php echo $left; ?></button>
+
+      <div class="tm-stage">
+        <?php foreach ($team_members as $slug => $m) :
+          $rm = occ_role_meta($m['role'] ?? '');
+
+          // "About me" text: uses the first of these keys that exists in team-data.php
+          $about = '';
+          foreach (['about', 'bio', 'summary', 'description', 'intro'] as $k) {
+            if (!empty($m[$k]) && is_string($m[$k])) { $about = $m[$k]; break; }
+          }
+          if ($about === '') { $about = $m['name'] . ' is the ' . $rm['label'] . ' of our capstone team.'; }
+
+          $m_skills = array_filter((array) ($m['skills'] ?? []));
+
+          // split name: first part dark, last word blue
+          $parts = preg_split('/\s+/', trim($m['name']));
+          $last  = count($parts) > 1 ? array_pop($parts) : '';
+          $first = implode(' ', $parts);
+        ?>
+          <article class="tm-slide<?php echo $tm_i === 0 ? ' show' : ''; ?>"
+                   style="--a: var(<?php echo esc_attr($rm['color']); ?>)"
+                   aria-hidden="<?php echo $tm_i === 0 ? 'false' : 'true'; ?>">
+            <div class="tm-pic">
+              <img src="<?php echo esc_url(panto_img($m['image'])); ?>" alt="<?php echo esc_attr($m['name']); ?>" decoding="async">
+            </div>
+            <div class="tm-info">
+              <p class="tm-hello">Hello, I'm</p>
+              <h3 class="tm-title">
+                <span class="tm-first"><?php echo esc_html($first); ?></span>
+                <?php if ($last !== '') : ?><span class="tm-last"><?php echo esc_html($last); ?></span><?php endif; ?>
+              </h3>
+              <div class="tm-badge"><?php echo esc_html($rm['label']); ?></div>
+              <span class="tm-line" aria-hidden="true"></span>
+              <p class="tm-about"><?php echo esc_html($about); ?></p>
+              <?php if ($m_skills) : ?>
+                <ul class="tm-skill-list">
+                  <?php foreach ($m_skills as $s) : ?><li><?php echo esc_html($s); ?></li><?php endforeach; ?>
+                </ul>
+              <?php endif; ?>
+
+              <!-- social links -->
+              <ul class="tm-social" aria-label="<?php echo esc_attr($m['name']); ?> on social media">
+                <?php foreach ($socials as $key => $soc) :
+                  $url = '';
+                  if (!empty($m[$key]) && is_string($m[$key])) { $url = $m[$key]; }
+                  elseif (!empty($m['social'][$key]) && is_string($m['social'][$key])) { $url = $m['social'][$key]; }
+                  $has = $url !== '';
+                ?>
+                  <li>
+                    <a href="<?php echo $has ? esc_url($url) : '#'; ?>"
+                       aria-label="<?php echo esc_attr($soc[0]); ?>" title="<?php echo esc_attr($soc[0]); ?>"
+                       <?php echo $has ? 'target="_blank" rel="noopener noreferrer"' : 'aria-disabled="true"'; ?>>
+                      <?php echo $soc[1]; ?>
+                    </a>
+                  </li>
+                <?php endforeach; ?>
+              </ul>
+
+            </div>
+
+            <aside class="tm-side" aria-hidden="true">
+            </aside>
+          </article>
+        <?php $tm_i++; endforeach; ?>
+      </div>
+
+      <button type="button" class="tm-nav tm-next" aria-label="Next member"><?php echo $arrow; ?></button>
+
+      <!-- avatars of every member (click to jump) -->
+      <div class="tm-dots">
+        <?php $d = 0; foreach ($team_members as $slug => $m) : ?>
+          <button type="button" class="<?php echo $d === 0 ? 'active' : ''; ?>" aria-label="Show <?php echo esc_attr($m['name']); ?>">
+            <img src="<?php echo esc_url(panto_img($m['image'])); ?>" alt="" loading="lazy" decoding="async">
+          </button>
+        <?php $d++; endforeach; ?>
+      </div>
     </div>
   </div>
+
+  <script>
+  (function () {
+    var root = document.querySelector('[data-tm]');
+    if (!root) return;
+    var slides = [].slice.call(root.querySelectorAll('.tm-slide'));
+    var dots   = [].slice.call(root.querySelectorAll('.tm-dots button'));
+    var i = 0, lock = false;
+    if (slides.length < 2) { root.classList.add('single'); return; }
+
+    function go(n, dir) {
+      n = (n + slides.length) % slides.length;
+      if (n === i || lock) return;
+      lock = true;
+      var cur = slides[i], nxt = slides[n];
+
+      // place the incoming card off to the side (no animation), then slide it in
+      nxt.classList.remove('out-l', 'out-r');
+      nxt.style.transition = 'none';
+      nxt.classList.add(dir > 0 ? 'pre-r' : 'pre-l');
+      void nxt.offsetWidth;
+      nxt.style.transition = '';
+      nxt.classList.remove('pre-r', 'pre-l');
+
+      cur.classList.remove('show');
+      cur.classList.add(dir > 0 ? 'out-l' : 'out-r');
+      cur.setAttribute('aria-hidden', 'true');
+      nxt.classList.add('show');
+      nxt.setAttribute('aria-hidden', 'false');
+
+      dots.forEach(function (d, k) { d.classList.toggle('active', k === n); });
+      i = n;
+      setTimeout(function () { lock = false; }, 450);
+    }
+
+    root.querySelector('.tm-prev').addEventListener('click', function () { go(i - 1, -1); });
+    root.querySelector('.tm-next').addEventListener('click', function () { go(i + 1, 1); });
+    dots.forEach(function (d, k) { d.addEventListener('click', function () { go(k, k > i ? 1 : -1); }); });
+
+    // keyboard (left / right) while focus is inside, and swipe on phones
+    root.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft')  go(i - 1, -1);
+      if (e.key === 'ArrowRight') go(i + 1, 1);
+    });
+    var x0 = null;
+    root.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    root.addEventListener('touchend', function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 50) go(dx < 0 ? i + 1 : i - 1, dx < 0 ? 1 : -1);
+      x0 = null;
+    });
+  })();
+  </script>
 </section>
 
 <!-- MEMORIES -->
@@ -203,7 +316,7 @@ $quote_icon = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><
 </section>
 
 <!-- PROCESS -->
-<section class="steps">
+<section class="steps" id="process">
   <span class="ghost" data-dir="-1" aria-hidden="true">BUILD</span>
   <div class="wrap">
     <p class="tag rv">04 &middot; Process</p>
