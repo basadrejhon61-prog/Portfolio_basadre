@@ -22,9 +22,9 @@ return [
     'color'     => '#fff6f6',
     'image'     => 'basadre.jpg',
     'role'      => 'BSIT Student',
-    'email'     => 'email@example.com',
-    'phone'     => '+63 9XX XXX XXXX',
-    'address'   => 'Opol, Misamis Oriental',
+    'email'     => 'basadrejhon62@gmail.com',
+    'phone'     => '+63 9082457001',
+    'address'   => 'Poblacion, Opol, Misamis Oriental',
     'about'     => 'Isulat dinhi ang mubo nga paghulagway bahin ni Jhon Christian Basadre, ang iyang mga interes ug tumong.',
     'education' => [
       ['Opol Community College', 'Bachelor of Science in Information Technology', '2022 - Present'],
@@ -33,9 +33,9 @@ return [
     'skills'    => ['Web Development', 'PHP', 'JavaScript', 'HTML & CSS', 'MySQL'],
     'resume'    => '',
     'facebook'  => 'https://www.facebook.com/share/1d4an9edo1/',  
-    'twitter'   => '',   // https://twitter.com/...
-    'instagram' => '',   // https://instagram.com/...
-    'tiktok'    => '',   // https://tiktok.com/@...
+    'twitter'   => '',  
+    'instagram' => 'https://www.instagram.com/james_chris_basadre?obrf=MXA2ZG1iNmU0c29tcw==',
+    'tiktok'    => 'https://tiktok.com/@jcbwomanizer09',  
   ],
 
   'cachero' => [
@@ -43,9 +43,9 @@ return [
     'color'     => '#eef1f5',
     'image'     => 'gwapo.jpg',
     'role'      => 'BSIT Student',
-    'email'     => 'email@example.com',
-    'phone'     => '+63 9XX XXX XXXX',
-    'address'   => 'Opol, Misamis Oriental',
+    'email'     => 'janjancachero082705@gmail.com',
+    'phone'     => '+63 9701992668',
+    'address'   => 'Tingalan, Opol, Misamis Oriental',
     'about'     => 'Isulat dinhi ang mubo nga paghulagway bahin ni Justine Cachero.',
     'education' => [
       ['Opol Community College', 'Bachelor of Science in Information Technology', '2022 - Present'],
@@ -55,7 +55,7 @@ return [
     'facebook'  => 'https://www.facebook.com/justine.cachero.73',
     'twitter'   => '',
     'instagram' => '',
-    'tiktok'    => '',
+    'tiktok'    => 'https://tiktok.com/@justinecachero',
   ],
 
   'campion' => [
@@ -63,19 +63,17 @@ return [
     'color'     => '#f3f0f8',
     'image'     => 'campion.jpg',
     'role'      => 'BSIT Student',
-    'email'     => 'email@example.com',
-    'phone'     => '+63 9XX XXX XXXX',
-    'address'   => 'Opol, Misamis Oriental',
+    'email'     => 'occ.campion.jayson07@gmail.com',
+    'phone'     => '+63 9690837369',
+    'address'   => 'Sta. Cruz, Tagoloan, Misamis Oriental',
     'about'     => 'Isulat dinhi ang mubo nga paghulagway bahin ni Jayson Campion.',
     'education' => [
       ['Opol Community College', 'Bachelor of Science in Information Technology', '2022 - Present'],
     ],
     'skills'    => ['Web Development', 'Networking', 'Graphic Design'],
     'resume'    => '',
-    'facebook'  => '',
-    'twitter'   => '',
-    'instagram' => '',
-    'tiktok'    => '',
+    'facebook'  => 'https://www.facebook.com/share/1MYVYUz4qa/',
+    'tiktok'    => 'https://tiktok.com/@muzanskie',
   ],
 
   'muego' => [
@@ -83,19 +81,19 @@ return [
     'color'     => '#effff6',
     'image'     => 'pangit.jpg',
     'role'      => 'BSIT Student',
-    'email'     => 'email@example.com',
-    'phone'     => '+63 9XX XXX XXXX',
-    'address'   => 'Opol, Misamis Oriental',
+    'email'     => 'kimkeeshamuego@gmail.com',
+    'phone'     => '+63 9758416199',
+    'address'   => 'Poblacion,Opol, Misamis Oriental',
     'about'     => 'Isulat dinhi ang mubo nga paghulagway bahin ni Kim Muego.',
     'education' => [
       ['Opol Community College', 'Bachelor of Science in Information Technology', '2022 - Present'],
     ],
     'skills'    => ['Web Development', 'Programming', 'Documentation'],
     'resume'    => '',
-    'facebook'  => '',
+    'facebook'  => 'https://www.facebook.com/share/1PdU8xQ7fF/',
     'twitter'   => '',
     'instagram' => '',
-    'tiktok'    => '',
+    'tiktok'    => 'https://vt.tiktok.com/ZSpQfCHvV/',
   ],
 
 ];
