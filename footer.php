@@ -1,7 +1,8 @@
 </main>
+
 <style>
-/* Cream footer (naka-embed aron dili madepende sa cache sa style.css) */
-.site-footer{background:#f6f4ef !important;color:#3d4540 !important;padding:0 !important;border-top:1px solid #e2dfd6 !important}
+/* Light Blue Footer (In-update ang kulay para magtugma sa theme) */
+.site-footer{background:#DCE7FA !important;color:#0A1A2F !important;padding:0 !important;border-top:1px solid #B7C4DA !important}
 .site-footer a{color:inherit;text-decoration:none}
 .site-footer svg{display:block;flex:none}
 
@@ -9,25 +10,25 @@
 .site-footer .foot-grid{display:grid !important;grid-template-columns:1.5fr 1fr 1fr 1.4fr;gap:40px;padding:40px 0 36px}
 .site-footer .foot-brand .logo{display:flex;align-items:center;gap:12px}
 .site-footer .foot-brand .logo img{height:44px;width:auto;max-width:52px;background:none;padding:0;border-radius:0}
-.site-footer .logo-text b{font-size:17px;font-weight:700;line-height:1.2;color:#0b1f3a !important;text-transform:none;letter-spacing:0}
-.site-footer .logo-text small{display:block;font-size:11px;font-style:italic;color:#1d4ed8 !important;margin-top:2px}
-.site-footer .foot-about{font-size:13px;line-height:1.6;margin:18px 0 0 !important;max-width:260px;color:#3d4540 !important}
+.site-footer .logo-text b{font-size:17px;font-weight:700;line-height:1.2;color:#0A1A2F !important;text-transform:none;letter-spacing:0}
+.site-footer .logo-text small{display:block;font-size:11px;font-style:italic;color:#0284C7 !important;margin-top:2px}
+.site-footer .foot-about{font-size:13px;line-height:1.6;margin:18px 0 0 !important;max-width:260px;color:#475569 !important}
 .site-footer .foot-social{display:flex;gap:14px;margin-top:22px}
-.site-footer .foot-social a{width:34px;height:34px;border-radius:50%;background:#0b1f3a;color:#fff !important;display:grid;place-items:center;transition:transform .2s,background .2s}
-.site-footer .foot-social a:hover{transform:translateY(-2px);background:#1d4ed8}
+.site-footer .foot-social a{width:34px;height:34px;border-radius:50%;background:#FFFFFF;color:#0A1A2F !important;border:1px solid #B7C4DA;display:grid;place-items:center;transition:transform .2s,background .2s}
+.site-footer .foot-social a:hover{transform:translateY(-2px);background:#0284C7;color:#FFFFFF !important}
 .site-footer .foot-social svg{width:16px;height:16px}
-.site-footer h4{font-size:15px;font-weight:600;color:#0b1f3a !important;margin:0 0 18px}
+.site-footer h4{font-size:15px;font-weight:600;color:#0A1A2F !important;margin:0 0 18px}
 .site-footer ul{list-style:none;display:grid;gap:12px;margin:0;padding:0}
-.site-footer li{font-size:13px;margin:0 !important;color:#3d4540}
-.site-footer li a:hover{color:#1d4ed8;text-decoration:underline}
+.site-footer li{font-size:13px;margin:0 !important;color:#475569}
+.site-footer li a:hover{color:#0284C7;text-decoration:underline}
 .site-footer .contact-list li{display:flex;gap:12px;align-items:flex-start;line-height:1.5}
-.site-footer .contact-list svg{width:16px;height:16px;margin-top:2px;color:#0b1f3a}
+.site-footer .contact-list svg{width:16px;height:16px;margin-top:2px;color:#0A1A2F}
 
 /* Ubos nga bar */
-.site-footer .copy{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:20px 0 24px;margin:0 !important;border-top:1px solid #e2dfd6 !important;font-size:12px;color:#5d655f !important}
+.site-footer .copy{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:20px 0 24px;margin:0 !important;border-top:1px solid #B7C4DA !important;font-size:12px;color:#475569 !important}
 .site-footer .copy-links{display:flex;align-items:center;gap:18px}
-.site-footer .copy-links i{width:1px;height:14px;background:#c9c5b8}
-.site-footer .copy-links a:hover{color:#1d4ed8;text-decoration:underline}
+.site-footer .copy-links i{width:1px;height:14px;background:#B7C4DA}
+.site-footer .copy-links a:hover{color:#0284C7;text-decoration:underline}
 
 @media(max-width:900px){
   .site-footer .foot-grid{grid-template-columns:1fr 1fr}
@@ -73,9 +74,11 @@
         <h4>Quick Links</h4>
         <ul>
           <li><a href="<?php echo esc_url(home_url('/')); ?>">Home</a></li>
-          <li><a href="#about">Profile</a></li>
+          <!-- IN-UPDATE: #about naging #team -->
+          <li><a href="#team">Profile</a></li>
           <li><a href="#collections">Collection</a></li>
-          <li><a href="#inspiration">Inspiration</a></li>
+          <!-- IN-UPDATE: #inspiration naging #projects -->
+          <li><a href="#projects">Inspiration</a></li>
           <li><a href="#contact">Contact Us</a></li>
         </ul>
       </div>

@@ -29,9 +29,9 @@
         else : ?>
           <ul>
             <li><a class="active" href="#top">Home</a></li>
-            <li><a href="#about">Profile</a></li>
+            <li><a href="#team">Profile</a></li>
             <li><a href="#collections">Collections</a></li>
-            <li><a href="#inspiration">Inspiration</a></li>
+            <li><a href="#projects">Inspiration</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         <?php endif; ?>

@@ -32,7 +32,7 @@ return [
   'cachero' => [
     'name'      => 'Justine Cachero',
     'color'     => '#eef1f5',
-    'image'     => 'profile.jpg',
+    'image'     => 'gwapo.jpg',
     'role'      => 'BSIT Student',
     'email'     => 'email@example.com',
     'phone'     => '+63 9XX XXX XXXX',
@@ -64,7 +64,7 @@ return [
   'muego' => [
     'name'      => 'Kim Muego',
     'color'     => '#effff6',
-    'image'     => 'profile.jpg',
+    'image'     => 'pangit.jpg',
     'role'      => 'BSIT Student',
     'email'     => 'email@example.com',
     'phone'     => '+63 9XX XXX XXXX',
