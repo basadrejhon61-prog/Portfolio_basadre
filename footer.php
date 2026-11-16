@@ -194,9 +194,10 @@ body footer.site-footer.occ-foot .occ-bottom .occ-sep{ display:inline-block; wid
         <ul class="occ-links">
           <li><a href="<?php echo esc_url(home_url('/')); ?>">Home</a></li>
           <li><a href="#team">Profile</a></li>
-          <li><a href="#collections">Collection</a></li>
-          <li><a href="#projects">Inspiration</a></li>
-          <li><a href="#contact">Contact Us</a></li>
+          <li><a href="#collections">Memories</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Process</a></li>
+          <li><a href="#feedback">Feedback</a></li>
         </ul>
       </div>
 

@@ -69,3 +69,4 @@ add_action('wp_head', function () {
 JS;
     echo "\n</script>\n";
 }, 0);
+

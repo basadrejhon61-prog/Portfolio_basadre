@@ -331,6 +331,24 @@ $tm_i      = 0;
   /* avatar strip */
   body main #team .tm-dots { padding-top: 6px; }
 
+  /* ===== FIX: nothing may block the Email / View profile buttons ===== */
+  body main #team .ghost,
+  body main #team .tm-deco,
+  body main #team .tm-side,
+  body main #team .tm-sage,
+  body main #team .tm-visual { pointer-events: none; }
+
+  /* hidden slides must never sit on top of the active one */
+  body main #team .tm-slide:not(.show),
+  body main #team .tm-slide:not(.show) * { pointer-events: none !important; }
+  body main #team .tm-slide.show { pointer-events: auto; }
+
+  /* buttons always on top and clickable */
+  body main #team .tm-info    { position: relative; z-index: 6; }
+  body main #team .tm-actions { position: relative; z-index: 7; }
+  body main #team .tm-cta,
+  body main #team .tm-cta2    { position: relative; z-index: 8; pointer-events: auto !important; cursor: pointer; }
+
   /* ===== scroll IN / OUT (only when JS runs) ===== */
   html.tm-js body main #team [data-tma] { transition: opacity .8s var(--ease), transform .9s var(--ease); will-change: opacity, transform; }
   html.tm-js body main #team [data-tma]:not(.tm-in)         { opacity: 0 !important; transform: translateY(60px) scale(.96); }
@@ -422,15 +440,19 @@ $tm_i      = 0;
   </script>
 
   <script>
-  // Email button: Gmail compose on computers, normal mailto: link on phones / tablets
-  (function () {
+  // Email button: click -> Gmail compose (PC) or the phone's mail app, sent to THAT member's email
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('#team a.tm-cta2') : null;
+    if (!a) return;
+    e.preventDefault(); e.stopPropagation();
+
     var mobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-    if (!mobile) return;
-    [].forEach.call(document.querySelectorAll('#team a[data-mailto]'), function (a) {
-      a.href = a.getAttribute('data-mailto');
-      a.removeAttribute('target');
-    });
-  })();
+    if (mobile) {
+      window.location.href = a.getAttribute('data-mailto');          // opens the phone's mail app
+    } else {
+      window.open(a.getAttribute('href'), '_blank', 'noopener');     // opens Gmail compose
+    }
+  }, true);
 
   // social icons: open the member's own page directly
   document.addEventListener('click', function (e) {
