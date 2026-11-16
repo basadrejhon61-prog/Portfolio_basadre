@@ -25,17 +25,17 @@ return [
     'email'     => 'basadrejhon62@gmail.com',
     'phone'     => '+63 9082457001',
     'address'   => 'Poblacion, Opol, Misamis Oriental',
-    'about'     => 'Isulat dinhi ang mubo nga paghulagway bahin ni Jhon Christian Basadre, ang iyang mga interes ug tumong.',
+    'about'     => 'I am an IT student passionate about programming, web development, and technology. I enjoy creating websites and applications, learning new programming languages, and developing solutions through coding. I am continuously improving my skills and gaining experience as I work toward becoming a professional software developer.',
     'education' => [
       ['Opol Community College', 'Bachelor of Science in Information Technology', '2022 - Present'],
       ['Senior High School',     'Isulat ang ngalan sa eskwelahan',                  '2020 - 2022'],
     ],
     'skills'    => ['Web Development', 'PHP', 'JavaScript', 'HTML & CSS', 'MySQL'],
     'resume'    => '',
-    'facebook'  => 'https://www.facebook.com/share/1d4an9edo1/',  
-    'twitter'   => '',  
+    'facebook'  => 'https://www.facebook.com/share/1d4an9edo1/',
+    'twitter'   => '',
     'instagram' => 'https://www.instagram.com/james_chris_basadre?obrf=MXA2ZG1iNmU0c29tcw==',
-    'tiktok'    => 'https://tiktok.com/@jcbwomanizer09',  
+    'tiktok'    => 'https://tiktok.com/@jcbwomanizer09',
   ],
 
   'cachero' => [
@@ -46,7 +46,7 @@ return [
     'email'     => 'janjancachero082705@gmail.com',
     'phone'     => '+63 9701992668',
     'address'   => 'Tingalan, Opol, Misamis Oriental',
-    'about'     => 'Isulat dinhi ang mubo nga paghulagway bahin ni Justine Cachero.',
+    'about'     => 'I am an IT student interested in system analysis, system design, and software development. I enjoy analyzing problems, gathering user requirements, designing system solutions, and understanding how technology can improve business processes. I continuously develop my analytical, technical, and problem-solving skills to become a professional System Analyst.',
     'education' => [
       ['Opol Community College', 'Bachelor of Science in Information Technology', '2022 - Present'],
     ],
@@ -66,7 +66,7 @@ return [
     'email'     => 'occ.campion.jayson07@gmail.com',
     'phone'     => '+63 9690837369',
     'address'   => 'Sta. Cruz, Tagoloan, Misamis Oriental',
-    'about'     => 'Isulat dinhi ang mubo nga paghulagway bahin ni Jayson Campion.',
+    'about'     => 'I am an IT student with an interest in project management, team collaboration, and software development. I enjoy planning projects, organizing tasks, coordinating with team members, and ensuring that project goals are achieved. I aim to strengthen my leadership, communication, and problem-solving skills while gaining experience in managing technology projects.',
     'education' => [
       ['Opol Community College', 'Bachelor of Science in Information Technology', '2022 - Present'],
     ],
@@ -84,7 +84,7 @@ return [
     'email'     => 'kimkeeshamuego@gmail.com',
     'phone'     => '+63 9758416199',
     'address'   => 'Poblacion,Opol, Misamis Oriental',
-    'about'     => 'Isulat dinhi ang mubo nga paghulagway bahin ni Kim Muego.',
+    'about'     => 'I am an IT student interested in technical writing and documentation. I enjoy creating clear and organized technical documents, user guides, system manuals, and project documentation. I aim to communicate complex technical information in a simple and understandable way while continuously improving my writing, research, and documentation skills.',
     'education' => [
       ['Opol Community College', 'Bachelor of Science in Information Technology', '2022 - Present'],
     ],
@@ -98,4 +98,24 @@ return [
 
 ];
 }
+}
+
+/**
+ * Gmail / mailto links for a team member.
+ * Returns null when the email is invalid (so the button is not shown).
+ */
+if (!function_exists('occ_mail_links')) {
+  function occ_mail_links($email, $name = '') {
+    $email = trim((string) $email);
+    if ($email === '' || !is_email($email)) { return null; }
+
+    $subj = rawurlencode('Hello ' . $name);
+    $body = rawurlencode('Hi ' . $name . ",\r\n\r\n");
+
+    return [
+      'email'  => $email,
+      'gmail'  => 'https://mail.google.com/mail/?view=cm&fs=1&to=' . rawurlencode($email) . '&su=' . $subj . '&body=' . $body,
+      'mailto' => 'mailto:' . $email . '?subject=' . $subj . '&body=' . $body,
+    ];
+  }
 }
