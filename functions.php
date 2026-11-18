@@ -12,12 +12,12 @@ add_action('after_setup_theme', 'panto_setup');
 
 /* Styles + script. No web fonts: the theme uses the visitor's default system font. */
 function panto_assets() {
-   wp_enqueue_style(
-  'panto-style',
-  get_stylesheet_uri(),
-  [],
-  filemtime(get_stylesheet_directory() . '/style.css')
-);
+    wp_enqueue_style(
+        'panto-style',
+        get_stylesheet_uri(),
+        [],
+        filemtime(get_stylesheet_directory() . '/style.css')
+    );
     wp_enqueue_script('panto-main', get_template_directory_uri() . '/assets/js/main.js', [], wp_get_theme()->get('Version'), [
         'in_footer' => true,
         'strategy'  => 'defer',
@@ -70,3 +70,117 @@ JS;
     echo "\n</script>\n";
 }, 0);
 
+
+/* ===================== VISITOR FEEDBACK (Facebook-style comments) =====================
+   true  = ang feedback mo-appear dayon
+   false = pending una, i-approve sa WP Admin > Feedback (Publish) */
+if (!defined('OCC_FB_AUTO_PUBLISH')) define('OCC_FB_AUTO_PUBLISH', true);
+
+add_action('init', function () {
+    register_post_type('occ_feedback', [
+        'labels'          => ['name' => 'Feedback', 'singular_name' => 'Feedback', 'menu_name' => 'Feedback'],
+        'public'          => false,
+        'show_ui'         => true,
+        'menu_icon'       => 'dashicons-star-filled',
+        'menu_position'   => 26,
+        'supports'        => ['title', 'editor'],
+        'capability_type' => 'post',
+    ]);
+});
+
+function occ_fb_item($p) {
+    $name = get_post_meta($p->ID, '_fb_name', true);
+    if ($name === '') { $name = 'Anonymous'; }
+    return [
+        'id'      => (int) $p->ID,
+        'name'    => $name,
+        'initial' => mb_strtoupper(mb_substr($name, 0, 1)),
+        'hue'     => abs(crc32(strtolower($name))) % 360,
+        'rating'  => (int) get_post_meta($p->ID, '_fb_rating', true),
+        'message' => $p->post_content,
+        'time'    => human_time_diff(get_post_time('U', true, $p), time()) . ' ago',
+        'likes'   => (int) get_post_meta($p->ID, '_fb_likes', true),
+    ];
+}
+
+function occ_fb_stats() {
+    global $wpdb;
+    $row = $wpdb->get_row("SELECT COUNT(*) c, COALESCE(SUM(m.meta_value),0) s
+        FROM {$wpdb->posts} p
+        JOIN {$wpdb->postmeta} m ON m.post_id = p.ID AND m.meta_key = '_fb_rating'
+        WHERE p.post_type = 'occ_feedback' AND p.post_status = 'publish'");
+    return ['count' => (int) ($row->c ?? 0), 'sum' => (int) ($row->s ?? 0)];
+}
+
+/* list (public read) */
+function occ_fb_ajax_list() {
+    $page = max(1, (int) ($_POST['page'] ?? 1));
+    $per  = min(20, max(1, (int) ($_POST['per'] ?? 8)));
+    $q = new WP_Query([
+        'post_type' => 'occ_feedback', 'post_status' => 'publish',
+        'posts_per_page' => $per, 'paged' => $page,
+        'orderby' => 'date', 'order' => 'DESC',
+    ]);
+    $items = array_map('occ_fb_item', $q->posts);
+    wp_send_json_success(['items' => $items, 'total' => (int) $q->found_posts, 'pages' => (int) $q->max_num_pages, 'stats' => occ_fb_stats()]);
+}
+add_action('wp_ajax_occ_fb_list', 'occ_fb_ajax_list');
+add_action('wp_ajax_nopriv_occ_fb_list', 'occ_fb_ajax_list');
+
+/* submit */
+function occ_fb_ajax_submit() {
+    check_ajax_referer('occ_fb', 'nonce');
+
+    // honeypot: bots fill this, humans never see it
+    if (!empty($_POST['website'])) { wp_send_json_success(['pending' => true]); }
+
+    $name   = mb_substr(sanitize_text_field(wp_unslash($_POST['name'] ?? '')), 0, 60);
+    $msg    = sanitize_textarea_field(wp_unslash($_POST['message'] ?? ''));
+    $rating = (int) ($_POST['rating'] ?? 0);
+
+    if ($rating < 1 || $rating > 5) { wp_send_json_error(['msg' => 'Please choose a star rating.']); }
+    if (mb_strlen($msg) < 10)       { wp_send_json_error(['msg' => 'Please write at least 10 characters.']); }
+    if (mb_strlen($msg) > 600)      { $msg = mb_substr($msg, 0, 600); }
+
+    // simple rate limit: 1 feedback / 45 seconds per visitor
+    $key = 'occ_fb_' . md5($_SERVER['REMOTE_ADDR'] ?? 'x');
+    if (get_transient($key)) { wp_send_json_error(['msg' => 'Please wait a moment before sending another one.']); }
+
+    $id = wp_insert_post(wp_slash([
+        'post_type'    => 'occ_feedback',
+        'post_title'   => $name !== '' ? $name : 'Anonymous',
+        'post_content' => $msg,
+        'post_status'  => OCC_FB_AUTO_PUBLISH ? 'publish' : 'pending',
+    ]), true);
+    if (is_wp_error($id)) { wp_send_json_error(['msg' => 'Could not save your feedback. Please try again.']); }
+
+    update_post_meta($id, '_fb_name', $name);
+    update_post_meta($id, '_fb_rating', $rating);
+    update_post_meta($id, '_fb_likes', 0);
+    set_transient($key, 1, 45);
+
+    // optional email notice to the site admin
+    wp_mail(get_option('admin_email'), 'New portfolio feedback (' . $rating . '/5)',
+        "From: " . ($name !== '' ? $name : 'Anonymous') . "\nRating: $rating/5\n\n$msg");
+
+    if (OCC_FB_AUTO_PUBLISH) {
+        wp_send_json_success(['pending' => false, 'item' => occ_fb_item(get_post($id)), 'stats' => occ_fb_stats()]);
+    }
+    wp_send_json_success(['pending' => true]);
+}
+add_action('wp_ajax_occ_fb_submit', 'occ_fb_ajax_submit');
+add_action('wp_ajax_nopriv_occ_fb_submit', 'occ_fb_ajax_submit');
+
+/* like / unlike */
+function occ_fb_ajax_like() {
+    check_ajax_referer('occ_fb', 'nonce');
+    $id = (int) ($_POST['id'] ?? 0);
+    $p  = get_post($id);
+    if (!$p || $p->post_type !== 'occ_feedback' || $p->post_status !== 'publish') { wp_send_json_error(); }
+    $n = (int) get_post_meta($id, '_fb_likes', true);
+    $n = (($_POST['do'] ?? '') === 'unlike') ? max(0, $n - 1) : $n + 1;
+    update_post_meta($id, '_fb_likes', $n);
+    wp_send_json_success(['likes' => $n]);
+}
+add_action('wp_ajax_occ_fb_like', 'occ_fb_ajax_like');
+add_action('wp_ajax_nopriv_occ_fb_like', 'occ_fb_ajax_like');

@@ -25,12 +25,12 @@ $icon  = function ($path) {
 /* Social icons shown under the skills (Facebook, Twitter, Instagram, TikTok).
    Links come from team-data.php: 'facebook', 'twitter', 'instagram', 'tiktok'
    (or inside a 'social' => [...] array). Missing link = the icon is not shown. */
-$socials = [
-  'facebook'  => ['Facebook',  '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg>'],
-  'twitter'   => ['Twitter',   '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.29 3.9A12.15 12.15 0 0 1 3.07 4.8a4.28 4.28 0 0 0 1.33 5.71 4.27 4.27 0 0 1-1.94-.54v.05a4.28 4.28 0 0 0 3.43 4.2 4.3 4.3 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.97A8.6 8.6 0 0 1 2 19.54a12.1 12.1 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2l-.01-.56A8.7 8.7 0 0 0 22.46 6z"/></svg>'],
-  'instagram' => ['Instagram', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>'],
-  'tiktok'    => ['TikTok',    '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.6 2.6 0 0 1-2.6-2.6 2.6 2.6 0 0 1 2.6-2.6c.27 0 .53.04.77.12V9.66a5.7 5.7 0 0 0-.77-.05A5.69 5.69 0 0 0 4.17 15.3a5.69 5.69 0 0 0 5.69 5.69 5.69 5.69 0 0 0 5.69-5.69V9.01a7.35 7.35 0 0 0 4.29 1.37V7.3a4.3 4.3 0 0 1-3.24-1.48z"/></svg>'],
-];
+// $socials = [
+//   'facebook'  => ['Facebook',  '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg>'],
+//   'twitter'   => ['Twitter',   '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.29 3.9A12.15 12.15 0 0 1 3.07 4.8a4.28 4.28 0 0 0 1.33 5.71 4.27 4.27 0 0 1-1.94-.54v.05a4.28 4.28 0 0 0 3.43 4.2 4.3 4.3 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.97A8.6 8.6 0 0 1 2 19.54a12.1 12.1 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2l-.01-.56A8.7 8.7 0 0 0 22.46 6z"/></svg>'],
+//   'instagram' => ['Instagram', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>'],
+//   'tiktok'    => ['TikTok',    '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.6 2.6 0 0 1-2.6-2.6 2.6 2.6 0 0 1 2.6-2.6c.27 0 .53.04.77.12V9.66a5.7 5.7 0 0 0-.77-.05A5.69 5.69 0 0 0 4.17 15.3a5.69 5.69 0 0 0 5.69 5.69 5.69 5.69 0 0 0 5.69-5.69V9.01a7.35 7.35 0 0 0 4.29 1.37V7.3a4.3 4.3 0 0 1-3.24-1.48z"/></svg>'],
+// ];
 
 /* Skills for the marquee: collected from every member's profile (no duplicates) */
 $skills = [];
@@ -45,8 +45,9 @@ $mq = function (array $items) {
 };
 
 /* ---------- FEEDBACK ----------
-   Add more entries to this list: arrows, dots and autoplay appear by themselves
-   when there is more than one. Only add real feedback from real people. */
+   Curated feedback (adviser etc). Add more entries to this list: arrows, dots and
+   autoplay appear by themselves when there is more than one.
+   Visitor comments are saved separately (see functions.php). */
 $feedbacks = [
   [
     'quote'  => 'This team demonstrated excellent collaboration and technical skills. Their capstone project was well-executed, highly functional, and exceeded our expectations.',
@@ -57,15 +58,6 @@ $feedbacks = [
   ],
 ];
 
-/* Feedback form sends an email to the Project Manager (falls back to the first member with an email) */
-$fb_email = '';
-foreach ($team_members as $mm) {
-  $r = occ_role_meta($mm['role'] ?? '');
-  if ($r['key'] === 'manager' && !empty($mm['email'])) { $fb_email = $mm['email']; break; }
-}
-if (!$fb_email) {
-  foreach ($team_members as $mm) { if (!empty($mm['email'])) { $fb_email = $mm['email']; break; } }
-}
 $quote_icon = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.2 6C4.9 7.4 3.5 9.7 3.5 12.6V18h6v-6H6.3c.1-1.6.9-2.8 2.4-3.6L7.2 6zm9.5 0c-2.3 1.4-3.7 3.7-3.7 6.6V18h6v-6h-3.2c.1-1.6.9-2.8 2.4-3.6L16.7 6z"/></svg>';
 ?>
 
@@ -162,7 +154,7 @@ $tm_i      = 0;
                    aria-hidden="<?php echo $tm_i === 0 ? 'false' : 'true'; ?>">
 
             <div class="tm-visual">
-              <span class="tm-sage" aria-hidden="true"></span>
+              <!-- <span class="tm-sage" aria-hidden="true"></span> -->
               <div class="tm-pic">
                 <img src="<?php echo esc_url(panto_img($m['image'])); ?>" alt="<?php echo esc_attr($m['name']); ?>" decoding="async">
               </div>
@@ -177,39 +169,23 @@ $tm_i      = 0;
               <div class="tm-badge"><?php echo esc_html($rm['label']); ?></div>
               <span class="tm-line" aria-hidden="true"></span>
               <p class="tm-about"><?php echo esc_html($about); ?></p>
-              <?php if ($m_skills) : ?>
-                <ul class="tm-skill-list">
-                  <?php foreach ($m_skills as $s) : ?><li><?php echo esc_html($s); ?></li><?php endforeach; ?>
-                </ul>
-              <?php endif; ?>
 
-              <!-- social links (only the ones with a link are shown) -->
-              <ul class="tm-social" aria-label="<?php echo esc_attr($m['name']); ?> on social media">
-                <?php foreach ($socials as $key => $soc) :
-                  $url = '';
-                  if (!empty($m[$key]) && is_string($m[$key])) { $url = trim($m[$key]); }
-                  elseif (!empty($m['social'][$key]) && is_string($m['social'][$key])) { $url = trim($m['social'][$key]); }
-                  if ($url === '') { continue; }   // no link = icon is not shown
-                  if (!preg_match('#^https?://#i', $url)) { $url = 'https://' . ltrim($url, '/'); }
-                ?>
-                  <li>
-                    <a href="<?php echo esc_url($url); ?>" target="_blank" rel="noopener noreferrer"
-                       aria-label="<?php echo esc_attr($m['name'] . ' on ' . $soc[0]); ?>" title="<?php echo esc_attr($m['name'] . ' - ' . $soc[0]); ?>">
-                      <?php echo $soc[1]; ?>
-                    </a>
-                  </li>
-                <?php endforeach; ?>
-              </ul>
+                            <p class="tm-about"><?php echo esc_html($about); ?></p>
 
-              <div class="tm-actions">
-                <a class="tm-cta" href="<?php echo esc_url($m_url); ?>">View full profile <?php echo $arrow; ?></a>
-                <?php if ($m_email) : ?>
-                  <a class="tm-cta2" href="<?php echo esc_url($gmail_url); ?>" target="_blank" rel="noopener noreferrer"
-                     data-mailto="<?php echo esc_attr($mailto_url); ?>"
-                     aria-label="Email <?php echo esc_attr($m['name']); ?> (opens Gmail)"><?php echo $tm_i_mail; ?>Email</a>
-                <?php endif; ?>
+              <!-- social icons (left) + buttons (right) in one row -->
+              <div class="tm-row">
+
+                
+                <div class="tm-actions">
+                  <a class="tm-cta" href="<?php echo esc_url($m_url); ?>">View full profile <?php echo $arrow; ?></a>
+                  <?php if ($m_email) : ?>
+                    <a class="tm-cta2" href="<?php echo esc_url($gmail_url); ?>" target="_blank" rel="noopener noreferrer"
+                       data-mailto="<?php echo esc_attr($mailto_url); ?>"
+                       aria-label="Email <?php echo esc_attr($m['name']); ?> (opens Gmail)"><?php echo $tm_i_mail; ?>Email</a>
+                  <?php endif; ?>
+                </div>
+
               </div>
-            </div>
 
             <aside class="tm-side" aria-hidden="true">
             </aside>
@@ -348,6 +324,12 @@ $tm_i      = 0;
   body main #team .tm-actions { position: relative; z-index: 7; }
   body main #team .tm-cta,
   body main #team .tm-cta2    { position: relative; z-index: 8; pointer-events: auto !important; cursor: pointer; }
+
+  /* ===== FIX: closed photo viewers / modals must never catch the mouse ===== */
+  body .mx-lb:not(.open),
+  body .pj-lb:not(.open) { pointer-events: none !important; }
+  body .mx-lb:not(.open) *,
+  body .pj-lb:not(.open) * { visibility: hidden !important; pointer-events: none !important; }
 
   /* ===== scroll IN / OUT (only when JS runs) ===== */
   html.tm-js body main #team [data-tma] { transition: opacity .8s var(--ease), transform .9s var(--ease); will-change: opacity, transform; }
@@ -857,17 +839,6 @@ $tm_i      = 0;
       <p class="pj-lead" data-pj="right">Systems and designs we built, tested and defended as BSIT students. Filter by category or click a project to see it bigger.</p>
     </div>
 
-    <div class="pj-bar" data-pj="up">
-      <div class="pj-chips" role="group" aria-label="Filter projects">
-        <button type="button" class="pj-chip active" data-filter="all">All projects</button>
-        <button type="button" class="pj-chip" data-filter="web">Web development</button>
-        <button type="button" class="pj-chip" data-filter="app">App development</button>
-        <button type="button" class="pj-chip" data-filter="uiux">UI/UX design</button>
-        <button type="button" class="pj-chip" data-filter="system">System development</button>
-      </div>
-      <p class="pj-count" aria-live="polite">Showing <b>4</b> of 4</p>
-    </div>
-
     <div class="pj-grid">
       <?php foreach ($projects as $i => $p) : $src = esc_url(panto_img($p[3])); ?>
         <div class="pj-item" data-cat="<?php echo esc_attr($p[0]); ?>" data-pj="<?php echo esc_attr($pj_dir[$i % 4]); ?>"
@@ -1245,9 +1216,12 @@ $tm_i      = 0;
 <section class="steps" id="process">
   <?php
   // add more steps here: [number, title, text, image]
-  $pc_steps = [
-    ['01', 'Planning & design', 'We brainstorm ideas, create wireframes, and plan the system architecture based on project requirements.', 'step-planning.jpg'],
-    ['02', 'Coding & testing',  'We write clean code, integrate features, and test the system thoroughly so the experience is seamless.', 'step-reveal.jpg'],
+    $pc_steps = [
+    ['01', 'Requirements gathering', 'We meet with the adviser and end users to collect, clarify, and document what the system needs to do.', 'step-requirements.jpg'],
+    ['02', 'Analysis & design',      'We analyze the requirements, then create wireframes, database structure, and the system architecture.', 'step-planning.jpg'],
+    ['03', 'Development',            'We write clean code and build the features module by module based on the approved design.', 'step-development.jpg'],
+    ['04', 'Testing & evaluation',   'We test the system thoroughly, fix bugs, and gather feedback to make sure it meets the requirements.', 'step-reveal.jpg'],
+    ['05', 'Deployment',             'We launch the finished system, prepare the documentation, and present it to the panel and end users.', 'step-deployment.jpg'],
   ];
   $pc_total = count($pc_steps);
   ?>
@@ -1561,7 +1535,14 @@ $tm_i      = 0;
 $fv_count = count($feedbacks);
 $fv_sum = 0;
 foreach ($feedbacks as $f) { $fv_sum += max(0, min(5, (int) ($f['rating'] ?? 5))); }
-$fv_avg = $fv_count ? number_format($fv_sum / $fv_count, 1) : '0.0';
+$fv_base_count = $fv_count;
+$fv_base_sum   = $fv_sum;
+
+// include visitor ratings in the average
+$vs = function_exists('occ_fb_stats') ? occ_fb_stats() : ['count' => 0, 'sum' => 0];
+$fv_all_count = $fv_base_count + $vs['count'];
+$fv_all_sum   = $fv_base_sum + $vs['sum'];
+$fv_avg = $fv_all_count ? number_format($fv_all_sum / $fv_all_count, 1) : '0.0';
 ?>
 <section class="testimonials" id="feedback">
   <span class="fv-deco fv-d1" aria-hidden="true"></span>
@@ -1576,20 +1557,20 @@ $fv_avg = $fv_count ? number_format($fv_sum / $fv_count, 1) : '0.0';
         <h2 class="fv-h2">What people say about our team</h2>
       </div>
       <div class="fv-lead" data-fv="right">
-        <p>Words from the people who guided and reviewed our work. Share your own thoughts too, it takes less than a minute.</p>
+        <p>Words from the people who guided and reviewed our work. Share your own thoughts about our system too, it takes less than a minute.</p>
         <div class="fv-stat">
           <span class="fv-avg"><?php echo esc_html($fv_avg); ?></span>
           <span class="fv-stat-r">
             <span class="fv-stat-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-            <small>Average from <?php echo (int) $fv_count; ?> review<?php echo $fv_count === 1 ? '' : 's'; ?></small>
+            <small>Average from <span class="fv-stat-n"><?php echo (int) $fv_all_count; ?></span> review<span class="fv-stat-s"><?php echo $fv_all_count === 1 ? '' : 's'; ?></span></small>
           </span>
         </div>
       </div>
     </div>
 
-    <div class="fv-grid<?php echo $fb_email ? '' : ' single'; ?>">
+    <div class="fv-grid">
 
-      <!-- slider -->
+      <!-- slider (feedback from advisers, written by you in $feedbacks) -->
       <div class="fv-main" data-fv="left" data-fv-slider role="region" aria-roledescription="carousel" aria-label="Feedback about our team">
         <span class="fv-bigq" aria-hidden="true"><?php echo $quote_icon; ?></span>
         <div class="fv-slides" aria-live="polite">
@@ -1622,11 +1603,10 @@ $fv_avg = $fv_count ? number_format($fv_sum / $fv_count, 1) : '0.0';
         <?php endif; ?>
       </div>
 
-      <!-- rate us -->
-      <?php if ($fb_email) : ?>
-      <form class="fv-form" data-fv="right" data-to="<?php echo esc_attr($fb_email); ?>" novalidate>
+      <!-- visitor feedback form (saved on the website) -->
+      <form class="fv-form" id="fv-form" data-fv="right" novalidate>
         <h3 class="fv-h3">Rate our work</h3>
-        <p class="fv-sub">Tell us what you think. This opens your email app with your message ready to send to the team.</p>
+        <p class="fv-sub">Tell us what you think about our system. Tap &ldquo;View comments&rdquo; to read what other visitors said.</p>
 
         <fieldset class="fv-rate">
           <legend class="screen-reader-text">Your rating</legend>
@@ -1642,19 +1622,39 @@ $fv_avg = $fv_count ? number_format($fv_sum / $fv_count, 1) : '0.0';
         <label class="fv-field"><span>Your name <em>(optional)</em></span>
           <input type="text" name="fv_name" maxlength="60" autocomplete="name">
         </label>
-        <label class="fv-field"><span>Message</span>
-          <textarea name="fv_message" rows="4" maxlength="600" required></textarea>
+        <label class="fv-field"><span>Comment</span>
+          <textarea name="fv_message" rows="4" maxlength="600" required placeholder="What do you think about our system?"></textarea>
           <small class="fv-chars">0 / 600</small>
         </label>
 
+        <!-- honeypot (hidden from people, bots fill it) -->
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
+
         <div class="fv-actions">
-          <button type="submit" class="fv-send">Send feedback <?php echo $arrow; ?></button>
-          <button type="button" class="fv-copy">Copy message</button>
+          <button type="submit" class="fv-send">Post feedback <?php echo $arrow; ?></button>
         </div>
+        <button type="button" class="fc-viewall">View comments (0)</button>
         <p class="fv-note" role="status" aria-live="polite"></p>
       </form>
-      <?php endif; ?>
 
+    </div>
+  </div>
+
+  <!-- comments modal (moved to <body> by the script below) -->
+  <div class="fc-modal" role="dialog" aria-modal="true" aria-label="All comments" aria-hidden="true">
+    <div class="fc-dialog">
+      <div class="fc-mhead">
+        <h3 class="fc-h3">All comments <span class="fc-badge fc-total">0</span></h3>
+        <button type="button" class="fc-x" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+      <div class="fc-mbody">
+        <ul class="fc-list fc-full"></ul>
+        <p class="fc-empty" hidden>No comments yet. Be the first to share your thoughts!</p>
+        <button type="button" class="fc-more" hidden>Load more comments</button>
+      </div>
+      <div class="fc-mfoot">
+        <button type="button" class="fc-write">Write a comment <?php echo $arrow; ?></button>
+      </div>
     </div>
   </div>
 
@@ -1714,7 +1714,7 @@ $fv_avg = $fv_count ? number_format($fv_sum / $fv_count, 1) : '0.0';
   body main #feedback .fv-stat-r small { font-family: var(--sans); font-size: .8rem; color: var(--fv-soft) !important; }
 
   body main #feedback .fv-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 34px); align-items: stretch; }
-  body main #feedback .fv-grid.single { grid-template-columns: minmax(0, 760px); }
+  body main #feedback .fc-card { grid-column: 1 / -1; }
 
   /* slider card */
   body main #feedback .fv-main {
@@ -1803,20 +1803,108 @@ $fv_avg = $fv_count ? number_format($fv_sum / $fv_count, 1) : '0.0';
     display: inline-flex; align-items: center; gap: 12px; padding: 14px 26px; border-radius: 999px; cursor: pointer; border: 0;
     font-family: var(--sans); font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
     color: #fff !important; background: var(--fv-blue); box-shadow: 0 10px 24px rgba(31, 79, 216, .3);
-    transition: transform .2s, box-shadow .2s, background .2s;
+    transition: transform .2s, box-shadow .2s, background .2s, opacity .2s;
   }
   body main #feedback .fv-send svg { width: 16px; height: 16px; transition: transform .2s; }
   body main #feedback .fv-send:hover { background: #183fb0; transform: translateY(-2px); box-shadow: 0 14px 30px rgba(31, 79, 216, .38); }
   body main #feedback .fv-send:hover svg { transform: translateX(4px); }
-  body main #feedback .fv-copy {
-    padding: 14px 22px; border-radius: 999px; cursor: pointer; background: transparent;
-    font-family: var(--sans); font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--fv-ink) !important; border: 1px solid rgba(0, 0, 0, .3); transition: background .2s, color .2s, border-color .2s;
-  }
-  body main #feedback .fv-copy:hover { background: var(--fv-ink); color: #fff !important; border-color: var(--fv-ink); }
+  body main #feedback .fv-send:disabled { opacity: .6; cursor: wait; transform: none; }
   body main #feedback .fv-note { min-height: 1.3em; margin: 0; font-family: var(--sans); font-size: .86rem; font-weight: 600; color: var(--fv-soft) !important; }
   body main #feedback .fv-note.ok  { color: #0f8a62 !important; }
   body main #feedback .fv-note.err { color: #d6453d !important; }
+
+  /* ===== Facebook-style comments ===== */
+  body main #feedback .fc-card {
+    position: relative; padding: clamp(22px, 3vw, 32px); border-radius: 22px; background: #fff;
+    border: 1px solid var(--fv-line); box-shadow: 0 22px 50px rgba(0, 0, 0, .1);
+  }
+  body main #feedback .fc-top, body .fc-mhead { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+  body main #feedback .fc-h3, body .fc-h3 {
+    margin: 0 !important; display: flex; align-items: center; gap: 10px;
+    font-family: var(--sans) !important; font-size: 1.2rem !important; font-weight: 800 !important;
+    color: #15161a !important; -webkit-text-fill-color: #15161a !important;
+  }
+  body main #feedback .fc-badge, body .fc-badge {
+    min-width: 28px; padding: 2px 10px; border-radius: 99px; text-align: center;
+    font-family: var(--sans); font-size: .8rem; font-weight: 700; color: #1f4fd8; background: rgba(31, 79, 216, .1);
+  }
+  body main #feedback .fc-viewall {
+    cursor: pointer; padding: 10px 18px; border-radius: 999px; background: transparent;
+    font-family: var(--sans); font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--fv-ink) !important; border: 1px solid rgba(0, 0, 0, .3); transition: background .2s, color .2s, border-color .2s;
+  }
+  body main #feedback .fc-viewall:hover { background: var(--fv-blue); color: #fff !important; border-color: var(--fv-blue); }
+  body main #feedback .fv-form .fc-viewall {
+    align-self: flex-start; padding: 8px 14px; font-size: .72rem;
+    border-color: rgba(0, 0, 0, .2);
+  }
+
+  body main #feedback .fc-list, body .fc-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+  body main #feedback .fc-item, body .fc-item { display: flex; gap: 12px; align-items: flex-start; animation: fcIn .5s var(--ease, ease) both; }
+  @keyframes fcIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  body main #feedback .fc-av, body .fc-av {
+    flex: none; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center;
+    font-family: var(--sans); font-size: 1.05rem; font-weight: 800; color: #fff;
+    background: hsl(var(--h, 220) 60% 46%);
+  }
+  body main #feedback .fc-main, body .fc-main { min-width: 0; flex: 1; }
+  body main #feedback .fc-bubble, body .fc-bubble {
+    display: inline-block; max-width: 100%; padding: 10px 16px 12px; border-radius: 18px; background: #f0f2f5;
+  }
+  body main #feedback .fc-name, body .fc-name { display: block; font-family: var(--sans); font-size: .92rem; font-weight: 700; color: #15161a !important; }
+  body main #feedback .fc-stars, body .fc-stars { display: block; font-size: .85rem; letter-spacing: 2px; color: #f2a900 !important; }
+  body main #feedback .fc-stars i, body .fc-stars i { font-style: normal; color: #cfd3da !important; }
+  body main #feedback .fc-text, body .fc-text {
+    margin: 4px 0 0 !important; font-family: var(--sans); font-size: .95rem; line-height: 1.55; color: #15161a !important;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  body main #feedback .fc-meta, body .fc-meta { display: flex; align-items: center; gap: 14px; padding: 4px 8px 0; font-family: var(--sans); font-size: .78rem; color: #65676b; }
+  body main #feedback .fc-like, body .fc-like {
+    padding: 0; border: 0; background: none; cursor: pointer; font: inherit; font-weight: 700; color: #65676b;
+  }
+  body main #feedback .fc-like:hover, body .fc-like:hover { text-decoration: underline; }
+  body main #feedback .fc-like.on, body .fc-like.on { color: #1f4fd8; }
+  body main #feedback .fc-likes, body .fc-likes { display: inline-flex; align-items: center; gap: 4px; font-weight: 600; }
+  body main #feedback .fc-likes[hidden], body .fc-likes[hidden] { display: none; }
+  body main #feedback .fc-empty, body .fc-empty { margin: 8px 0 0; font-family: var(--sans); font-size: .95rem; color: #65676b; text-align: center; padding: 18px 0; }
+
+  /* modal */
+  body .fc-modal {
+    position: fixed; inset: 0; z-index: 10060; display: grid; place-items: center; padding: 20px;
+    background: rgba(8, 10, 18, .7); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .3s ease, visibility .3s;
+  }
+  body .fc-modal.open { opacity: 1; visibility: visible; pointer-events: auto; }
+  body .fc-modal:not(.open), body .fc-modal:not(.open) * { pointer-events: none !important; }
+  body .fc-dialog {
+    display: flex; flex-direction: column; width: min(640px, 100%); max-height: min(86vh, 760px);
+    border-radius: 20px; background: #fff; box-shadow: 0 30px 80px rgba(0, 0, 0, .45);
+    transform: translateY(20px) scale(.97); transition: transform .4s cubic-bezier(.2, .7, .2, 1);
+  }
+  body .fc-modal.open .fc-dialog { transform: none; }
+  body .fc-mhead { padding: 18px 22px; margin: 0; border-bottom: 1px solid rgba(0, 0, 0, .1); }
+  body .fc-x {
+    width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
+    color: #15161a; background: #f0f2f5; border: 0; transition: background .2s, color .2s;
+  }
+  body .fc-x:hover { background: #1f4fd8; color: #fff; }
+  body .fc-x svg { width: 18px; height: 18px; }
+  body .fc-mbody { flex: 1; overflow-y: auto; padding: 20px 22px; overscroll-behavior: contain; }
+  body .fc-more {
+    display: block; margin: 18px auto 0; padding: 10px 22px; border-radius: 999px; cursor: pointer;
+    font-family: var(--sans); font-size: .8rem; font-weight: 700; color: #15161a; background: #f0f2f5; border: 0;
+  }
+  body .fc-more:hover { background: #e2e5ea; }
+  body .fc-more[hidden] { display: none; }
+  body .fc-mfoot { padding: 14px 22px; border-top: 1px solid rgba(0, 0, 0, .1); }
+  body .fc-write {
+    width: 100%; padding: 13px 22px; border-radius: 999px; cursor: pointer; border: 0;
+    font-family: var(--sans); font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: #fff; background: #1f4fd8; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  body .fc-write svg { width: 16px; height: 16px; }
+  body .fc-write:hover { background: #183fb0; }
+  html.fc-lock { overflow: hidden; }
 
   /* scroll in / out */
   html.fv-js body main #feedback [data-fv] { transition: opacity .8s var(--ease), transform .9s var(--ease); will-change: opacity, transform; }
@@ -1828,19 +1916,30 @@ $fv_avg = $fv_count ? number_format($fv_sum / $fv_count, 1) : '0.0';
   html.fv-js body main #feedback [data-fv].fv-in               { opacity: 1 !important; transform: none; }
 
   @media (max-width: 900px) {
-    body main #feedback .fv-head, body main #feedback .fv-grid, body main #feedback .fv-grid.single { grid-template-columns: 1fr; align-items: start; }
+    body main #feedback .fv-head, body main #feedback .fv-grid { grid-template-columns: 1fr; align-items: start; }
   }
   @media (max-width: 600px) {
     body main #feedback .fv-d1 { display: none; }
     body main #feedback .fv-stars-out { margin-left: 0; }
-    body main #feedback .fv-actions .fv-send, body main #feedback .fv-actions .fv-copy { width: 100%; justify-content: center; }
+    body main #feedback .fv-actions .fv-send { width: 100%; justify-content: center; }
+    body main #feedback .fc-top { flex-wrap: wrap; }
+    body .fc-modal { padding: 0; align-items: end; }
+    body .fc-dialog { max-height: 92vh; border-radius: 20px 20px 0 0; }
   }
   </style>
 
   <script>
+  window.OCC_FB = {
+    ajax:  <?php echo wp_json_encode(admin_url('admin-ajax.php')); ?>,
+    nonce: <?php echo wp_json_encode(wp_create_nonce('occ_fb')); ?>,
+    baseCount: <?php echo (int) $fv_base_count; ?>,
+    baseSum:   <?php echo (int) $fv_base_sum; ?>
+  };
+
   (function () {
     var sec = document.getElementById('feedback');
     if (!sec) return;
+    var cfg = window.OCC_FB;
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     /* ---------- feedback slider ---------- */
@@ -1894,31 +1993,155 @@ $fv_avg = $fv_count ? number_format($fv_sum / $fv_count, 1) : '0.0';
       }
     }
 
-    /* ---------- feedback form (opens the email app) ---------- */
-    var form = sec.querySelector('.fv-form');
+    /* ---------- helpers: ajax + liked store ---------- */
+    function api(action, data) {
+      var fd = new FormData();
+      fd.append('action', action);
+      fd.append('nonce', cfg.nonce);
+      Object.keys(data || {}).forEach(function (k) { fd.append(k, data[k]); });
+      return fetch(cfg.ajax, { method: 'POST', body: fd, credentials: 'same-origin' }).then(function (r) { return r.json(); });
+    }
+    function getLiked() { try { return JSON.parse(localStorage.getItem('occ_fb_liked') || '[]'); } catch (e) { return []; } }
+    function setLiked(a) { try { localStorage.setItem('occ_fb_liked', JSON.stringify(a)); } catch (e) {} }
+
+    /* ---------- comments (preview + modal) ---------- */
+    var viewAll = sec.querySelector('.fc-viewall');
+    var modal   = sec.querySelector('.fc-modal');
+    var full = modal.querySelector('.fc-full');
+    var emptyM = modal.querySelector('.fc-empty');
+    var moreBtn = modal.querySelector('.fc-more');
+    var totals = [].slice.call(document.querySelectorAll('#feedback .fc-total, .fc-modal .fc-total'));
+    var PER = 8, fullPage = 0, fullPages = 1, fullLoaded = false, total = 0;
+    document.body.appendChild(modal);
+
+    function updateStats(s, t) {
+      if (typeof t === 'number') {
+        total = t;
+        totals.forEach(function (el) { el.textContent = t; });
+        viewAll.textContent = 'View comments (' + t + ')';
+        emptyM.hidden = t > 0;
+      }
+      if (s) {
+        var n = cfg.baseCount + s.count, sum = cfg.baseSum + s.sum;
+        var a = sec.querySelector('.fv-avg'); if (a) a.textContent = n ? (sum / n).toFixed(1) : '0.0';
+        var c = sec.querySelector('.fv-stat-n'); if (c) c.textContent = n;
+        var ss = sec.querySelector('.fv-stat-s'); if (ss) ss.textContent = n === 1 ? '' : 's';
+      }
+    }
+
+    function el(tag, cls, text) {
+      var e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text != null) e.textContent = text;
+      return e;
+    }
+    function buildItem(it) {
+      var li = el('li', 'fc-item');
+      li.setAttribute('data-id', it.id);
+      var av = el('span', 'fc-av', it.initial); av.style.setProperty('--h', it.hue); av.setAttribute('aria-hidden', 'true');
+
+      var main = el('div', 'fc-main');
+      var bub = el('div', 'fc-bubble');
+      bub.appendChild(el('b', 'fc-name', it.name));
+      var st = el('span', 'fc-stars', '\u2605'.repeat(it.rating));
+      if (it.rating < 5) st.appendChild(el('i', '', '\u2605'.repeat(5 - it.rating)));
+      st.setAttribute('aria-label', it.rating + ' out of 5 stars');
+      bub.appendChild(st);
+      bub.appendChild(el('p', 'fc-text', it.message));
+
+      var meta = el('div', 'fc-meta');
+      var liked = getLiked().indexOf(it.id) > -1;
+      var like = el('button', 'fc-like' + (liked ? ' on' : ''), 'Like');
+      like.type = 'button';
+      var cntEl = el('span', 'fc-likes');
+      function paint(n) { cntEl.textContent = '\uD83D\uDC4D ' + n; cntEl.hidden = n < 1; }
+      paint(it.likes);
+      like.addEventListener('click', function () {
+        var on = like.classList.toggle('on');
+        var list = getLiked(), i = list.indexOf(it.id);
+        if (on && i < 0) list.push(it.id);
+        if (!on && i > -1) list.splice(i, 1);
+        setLiked(list);
+        paint(Math.max(0, it.likes + (on ? 1 : -1)));
+        api('occ_fb_like', { id: it.id, 'do': on ? 'like' : 'unlike' }).then(function (r) {
+          if (r && r.success) { it.likes = r.data.likes; paint(it.likes); }
+        }).catch(function () {});
+      });
+      meta.appendChild(like);
+      meta.appendChild(cntEl);
+      meta.appendChild(el('span', '', it.time));
+
+      main.appendChild(bub); main.appendChild(meta);
+      li.appendChild(av); li.appendChild(main);
+      return li;
+    }
+
+    function loadPreview() {
+      api('occ_fb_list', { page: 1, per: 1 }).then(function (r) {
+        if (!r || !r.success) return;
+        updateStats(r.data.stats, r.data.total);
+      }).catch(function () {});
+    }
+    function loadFull(reset) {
+      if (reset) { fullPage = 0; full.innerHTML = ''; }
+      moreBtn.disabled = true;
+      api('occ_fb_list', { page: fullPage + 1, per: PER }).then(function (r) {
+        moreBtn.disabled = false;
+        if (!r || !r.success) return;
+        fullPage++; fullPages = r.data.pages; fullLoaded = true;
+        r.data.items.forEach(function (it) { full.appendChild(buildItem(it)); });
+        moreBtn.hidden = fullPage >= fullPages;
+        updateStats(r.data.stats, r.data.total);
+      }).catch(function () { moreBtn.disabled = false; });
+    }
+    moreBtn.addEventListener('click', function () { loadFull(false); });
+    loadPreview();
+
+    /* modal open / close */
+    var lastFocus = null;
+    function openModal() {
+      lastFocus = document.activeElement;
+      if (!fullLoaded) loadFull(true);
+      modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false');
+      document.documentElement.classList.add('fc-lock');
+      modal.querySelector('.fc-x').focus();
+    }
+    function closeModal() {
+      modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true');
+      document.documentElement.classList.remove('fc-lock');
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    viewAll.addEventListener('click', openModal);
+    modal.querySelector('.fc-x').addEventListener('click', closeModal);
+    modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+    modal.querySelector('.fc-write').addEventListener('click', function () {
+      closeModal();
+      var f = document.getElementById('fv-form');
+      f.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      setTimeout(function () { f.querySelector('textarea').focus({ preventScroll: true }); }, 500);
+    });
+
+    /* ---------- feedback form (saved on the website) ---------- */
+    var form = document.getElementById('fv-form');
     if (form) {
       var note = form.querySelector('.fv-note');
       var msg = form.querySelector('textarea');
       var nm = form.querySelector('input[name="fv_name"]');
+      var hp = form.querySelector('input[name="website"]');
       var chars = form.querySelector('.fv-chars');
       var rateBox = form.querySelector('.fv-rate');
       var rateTxt = form.querySelector('.fv-rate-txt');
+      var sendBtn = form.querySelector('.fv-send');
       var labels = ['', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent'];
 
       function rating() { var r = form.querySelector('input[name="fv_rate"]:checked'); return r ? parseInt(r.value, 10) : 0; }
       function say(t, c) { note.textContent = t; note.className = 'fv-note' + (c ? ' ' + c : ''); }
-      function build() {
-        var r = rating(), who = nm.value.trim() || 'Anonymous';
-        return {
-          subject: 'Team feedback: ' + r + ' / 5 stars',
-          body: 'Rating: ' + r + ' / 5 (' + labels[r] + ')\nFrom: ' + who + '\n\n' + msg.value.trim()
-        };
-      }
       function check() {
         var ok = true;
         rateBox.classList.remove('bad');
         msg.parentNode.classList.remove('bad');
-        if (!rating()) { rateBox.classList.remove('bad'); void rateBox.offsetWidth; rateBox.classList.add('bad'); say('Please choose a star rating.', 'err'); ok = false; }
+        if (!rating()) { void rateBox.offsetWidth; rateBox.classList.add('bad'); say('Please choose a star rating.', 'err'); ok = false; }
         else if (msg.value.trim().length < 10) { msg.parentNode.classList.add('bad'); say('Please write at least 10 characters.', 'err'); msg.focus(); ok = false; }
         return ok;
       }
@@ -1934,26 +2157,20 @@ $fv_avg = $fv_count ? number_format($fv_sum / $fv_count, 1) : '0.0';
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         if (!check()) return;
-        var d = build();
-        say('Opening your email app…', 'ok');
-        window.location.href = 'mailto:' + form.getAttribute('data-to') + '?subject=' + encodeURIComponent(d.subject) + '&body=' + encodeURIComponent(d.body);
-        setTimeout(function () { say('If nothing opened, press "Copy message" and send it to ' + form.getAttribute('data-to') + '.', ''); }, 2500);
-      });
-
-      form.querySelector('.fv-copy').addEventListener('click', function () {
-        if (!check()) return;
-        var d = build(), text = 'To: ' + form.getAttribute('data-to') + '\nSubject: ' + d.subject + '\n\n' + d.body;
-        function done() { say('Copied! Paste it in your email.', 'ok'); }
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text).then(done, fallback);
-        } else { fallback(); }
-        function fallback() {
-          var t = document.createElement('textarea');
-          t.value = text; t.style.position = 'fixed'; t.style.opacity = '0';
-          document.body.appendChild(t); t.select();
-          try { document.execCommand('copy'); done(); } catch (err) { say('Could not copy. Please select the message and copy it.', 'err'); }
-          document.body.removeChild(t);
-        }
+        sendBtn.disabled = true; say('Posting…', '');
+        api('occ_fb_submit', { rating: rating(), name: nm.value.trim(), message: msg.value.trim(), website: hp.value })
+          .then(function (r) {
+            sendBtn.disabled = false;
+            if (!r || !r.success) { say((r && r.data && r.data.msg) || 'Something went wrong. Please try again.', 'err'); return; }
+            form.reset();
+            rateTxt.textContent = 'Tap a star'; chars.textContent = '0 / 600';
+            if (r.data.pending) { say('Thank you! Your feedback will appear once it is approved.', 'ok'); return; }
+            say('Thank you! Your comment was posted.', 'ok');
+            var it = r.data.item;
+            if (fullLoaded) full.insertBefore(buildItem(it), full.firstChild);
+            updateStats(r.data.stats, total + 1);
+          })
+          .catch(function () { sendBtn.disabled = false; say('No connection. Please try again.', 'err'); });
       });
     }
 
@@ -1963,12 +2180,12 @@ $fv_avg = $fv_count ? number_format($fv_sum / $fv_count, 1) : '0.0';
     document.documentElement.classList.add('fv-js');
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
-        var el = en.target;
-        if (en.isIntersecting) { el.classList.remove('fv-up', 'fv-down'); el.classList.add('fv-in'); }
-        else { el.classList.remove('fv-in'); el.classList.add(en.boundingClientRect.top < 0 ? 'fv-up' : 'fv-down'); }
+        var e = en.target;
+        if (en.isIntersecting) { e.classList.remove('fv-up', 'fv-down'); e.classList.add('fv-in'); }
+        else { e.classList.remove('fv-in'); e.classList.add(en.boundingClientRect.top < 0 ? 'fv-up' : 'fv-down'); }
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
-    [].forEach.call(els, function (el) { io.observe(el); });
+    [].forEach.call(els, function (e) { io.observe(e); });
   })();
   </script>
 </section>

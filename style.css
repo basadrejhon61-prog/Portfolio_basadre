@@ -7,7 +7,7 @@ Text Domain: panto-design
 */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap');
 /* =========================================================
    1. BASE  (palette = night editor theme)
    ========================================================= */
@@ -2051,3 +2051,59 @@ body.is-profile-page .profile .profile-block.about p {
     transform: translateY(-2px); transition-delay: 0s;
   }
 }
+
+/* =========================================================
+   32. CURSOR FIX (final, keep at the very end)
+       - removes the "not-allowed" cursor that the WordPress
+         Customizer adds to links it cannot preview
+       - photo cards keep the zoom-in cursor
+       - text fields keep the text cursor
+   ========================================================= */
+
+/* links / buttons the Customizer marks as "unpreviewable", and other clickable items */
+html body .customize-unpreviewable,
+html body a.customize-unpreviewable,
+html body a[target="_blank"],
+html body button:not(:disabled),
+html body [role="button"],
+html body label[for],
+html body select,
+html body summary,
+html body .tm-cta,
+html body .tm-cta2,
+html body .tm-social a,
+html body .tm-nav,
+html body .tm-dots button,
+html body .pj-chip,
+html body .pc-tab,
+html body .pc-arrows button,
+html body .fv-open,
+html body .fv-write,
+html body .fv-send {
+  cursor: pointer !important;
+}
+
+/* photo cards: zoom-in (higher specificity, so it wins over the rule above) */
+html body main #collections a.mx-card,
+html body main #collections a.mx-card.customize-unpreviewable,
+html body main #projects a.pj-card,
+html body main #projects a.pj-card.customize-unpreviewable,
+html body .memo-card,
+html body .memo-card.customize-unpreviewable {
+  cursor: zoom-in !important;
+}
+
+/* text fields */
+html body input[type="text"],
+html body input[type="email"],
+html body textarea {
+  cursor: text !important;
+}
+
+  /* icons on the left, buttons on the right (same row) */
+  body main #team .tm-row {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: 16px 28px; margin-top: 24px; width: 100%;
+  }
+  body main #team .tm-row .tm-social  { margin-top: 0; }
+  body main #team .tm-row .tm-actions { margin-top: 0; flex-wrap: nowrap; }
