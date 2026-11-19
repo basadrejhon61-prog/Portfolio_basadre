@@ -331,6 +331,12 @@ $tm_i      = 0;
   body .mx-lb:not(.open) *,
   body .pj-lb:not(.open) * { visibility: hidden !important; pointer-events: none !important; }
 
+  /* first card: keep the heads visible (crop the bottom instead of the top) */
+body main #collections .mx-c1 .mx-img {
+  object-fit: cover;
+  object-position: center top;
+}
+
   /* ===== scroll IN / OUT (only when JS runs) ===== */
   html.tm-js body main #team [data-tma] { transition: opacity .8s var(--ease), transform .9s var(--ease); will-change: opacity, transform; }
   html.tm-js body main #team [data-tma]:not(.tm-in)         { opacity: 0 !important; transform: translateY(60px) scale(.96); }
@@ -808,7 +814,7 @@ $tm_i      = 0;
 <section class="gallery" id="projects">
   <?php
   $projects = [
-    ['web',    'Capstone Project',  'E-Commerce System',   'project1.jpg'],
+    ['web',    'Capstone Project',  'MHO-OPOL',   'project1.jpg'],
     ['app',    'Student Portal',    'Web Application',     'project2.jpg'],
     ['uiux',   'Mobile App Design', 'UI/UX Prototype',     'project3.jpg'],
     ['system', 'Inventory System',  'Database Management', 'project4.jpg'],
@@ -1632,8 +1638,8 @@ $fv_avg = $fv_all_count ? number_format($fv_all_sum / $fv_all_count, 1) : '0.0';
 
         <div class="fv-actions">
           <button type="submit" class="fv-send">Post feedback <?php echo $arrow; ?></button>
+          <button type="button" class="fc-viewall">View comments (0)</button>
         </div>
-        <button type="button" class="fc-viewall">View comments (0)</button>
         <p class="fv-note" role="status" aria-live="polite"></p>
       </form>
 
@@ -1834,10 +1840,30 @@ $fv_avg = $fv_all_count ? number_format($fv_all_sum / $fv_all_count, 1) : '0.0';
     color: var(--fv-ink) !important; border: 1px solid rgba(0, 0, 0, .3); transition: background .2s, color .2s, border-color .2s;
   }
   body main #feedback .fc-viewall:hover { background: var(--fv-blue); color: #fff !important; border-color: var(--fv-blue); }
-  body main #feedback .fv-form .fc-viewall {
-    align-self: flex-start; padding: 8px 14px; font-size: .72rem;
-    border-color: rgba(0, 0, 0, .2);
+    body main #feedback .fv-form .fc-viewall {
+    align-self: center; padding: 14px 22px; font-size: .78rem;
+    border-color: rgba(0, 0, 0, .3);
   }
+
+  /* Post feedback + View comments on ONE row */
+body main #feedback .fv-actions {
+  display: flex; flex-wrap: nowrap; align-items: center; gap: 8px;
+}
+body main #feedback .fv-actions .fv-send {
+  padding: 14px 20px; font-size: .72rem; letter-spacing: .05em; gap: 8px; white-space: nowrap;
+}
+body main #feedback .fv-actions .fc-viewall,
+body main #feedback .fv-form .fc-viewall {
+  align-self: center; margin: 0; padding: 14px 16px;
+  font-size: .72rem; letter-spacing: .05em; white-space: nowrap;
+}
+
+/* phones: allow wrapping again */
+@media (max-width: 600px) {
+  body main #feedback .fv-actions { flex-wrap: wrap; }
+  body main #feedback .fv-actions .fv-send,
+  body main #feedback .fv-actions .fc-viewall { width: 100%; justify-content: center; }
+}
 
   body main #feedback .fc-list, body .fc-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
   body main #feedback .fc-item, body .fc-item { display: flex; gap: 12px; align-items: flex-start; animation: fcIn .5s var(--ease, ease) both; }

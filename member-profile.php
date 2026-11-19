@@ -392,6 +392,8 @@ $has_contact = ($email || $phone || $addr);
     color: transparent !important; -webkit-text-fill-color: transparent !important; -webkit-text-stroke: 1.5px rgba(31, 79, 216, .12);
   }
 
+  
+
   /* back link */
   body main #mp .mp-back {
     display: inline-flex; align-items: center; gap: 8px; margin-bottom: clamp(22px, 3vw, 34px);

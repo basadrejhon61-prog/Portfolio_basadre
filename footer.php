@@ -164,6 +164,11 @@ body footer.site-footer.occ-foot .occ-bottom a{ color:#4a4e5a !important; }
 body footer.site-footer.occ-foot .occ-bottom a:hover{ color:#1f4fd8 !important; text-decoration:underline; }
 body footer.site-footer.occ-foot .occ-bottom .occ-sep{ display:inline-block; width:1px; height:12px; margin:0 14px; vertical-align:middle; background:rgba(0,0,0,.2); }
 
+/* Team Members: heading centered above the photo + name */
+body footer.site-footer.occ-foot .occ-pickcol { text-align: center; }
+body footer.site-footer.occ-foot .occ-pickcol .occ-h { text-align: center; }
+body footer.site-footer.occ-foot .occ-pickcol .occ-pick { margin-inline: auto; }
+
 @media(max-width:1000px){
   body footer.site-footer.occ-foot .occ-grid{ grid-template-columns:1fr 1fr; }
   body footer.site-footer.occ-foot .occ-brand{ grid-column:1 / -1; }
